@@ -1,0 +1,30 @@
+﻿﻿body {
+    background-color: #5a50f4;
+}
+
+
+html, body {
+    height: 100%
+}
+
+.nav-link:hover {
+    background-color: #d3d3d3;
+}
+
+
+.site-title {
+    font-weight: 900;
+    font-size: 24px;
+}
+
+.btn-push-top-10 {
+    margin-top: 10px;
+}
+
+.footer-space {
+    margin-bottom: 100px;
+}
+
+a {
+    text-decoration: none;
+}
