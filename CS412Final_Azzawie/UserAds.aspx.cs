@@ -7,20 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace CS412Final_Azzawie
 {
-
-    public partial class LogIn : System.Web.UI.Page
+    public partial class UserAds : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
 
-
-            //Session["is_logedin"] = true;
-            //HttpContext.Current.Request.Cookies["user_name"] = "john";
-            //loginLink.Visible = false;
-
-
-
-        
         }
     }
 }

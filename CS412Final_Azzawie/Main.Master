@@ -52,9 +52,14 @@
                                     All Ads
                                 </a>
 
-                                <a class="dropdown-item" href="MyAds.aspx">
+                                <a class="dropdown-item" href="UserAds.aspx">
                                     <i class="fa fa-money" aria-hidden="true"></i>
                                     My Ads
+                                </a>
+
+                                <a class="dropdown-item" href="CreateAd.aspx">
+                                    <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                    Create Ad
                                 </a>
                             </div>
                         </li>
