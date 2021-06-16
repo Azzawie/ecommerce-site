@@ -21,9 +21,6 @@ namespace CS412Final_Azzawie
             // initiale a list which will contain all the errors (if exist).
             List<string> errors = new List<string>();
 
-            // Don't show the errors panel when the page load.
-            errorsPanel.Visible = false;
-
             // Check if the email field is empty
             if (string.IsNullOrEmpty(email.Text))
             {

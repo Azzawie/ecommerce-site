@@ -11,16 +11,14 @@ namespace CS412Final_Azzawie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            // Don't show the errors panel when the page load.
+            errorsPanel.Visible = false;
         }
 
         protected void btnSignup_Click(object sender, EventArgs e)
         {
             // initiale a list which will contain all the errors (if exist).
             List<string> errors = new List<string>();
-
-            // Don't show the errors panel when the page load.
-            errorsPanel.Visible = false;
 
             // Check if the first name field is empty
             if (string.IsNullOrEmpty(first.Text))
