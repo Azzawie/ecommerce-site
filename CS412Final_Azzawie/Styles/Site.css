@@ -109,3 +109,15 @@ a {
     margin: 50px auto;
     max-width:30% !important;
 }
+
+.custom-badge {
+    display: inline-block;
+    min-width: 1em;
+    padding: .3em;
+    margin:5px 5px;
+    border-radius: 50%;
+    font-size: 13px;
+    text-align: center;
+    background: #1779ba;
+    color: #fefefe;
+}
