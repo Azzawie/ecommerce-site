@@ -6,20 +6,27 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid pt-5">
         <div class="row">
-
-            <div class="form-content bordered-card" id="login-block
+            <div class="form-content bordered-card" id="login-block">
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <label class="field-lable" for="email">Email</label>
-                <input type="email" id="email" class="form-control" />
+                <label id="emailLbl" class="field-lable" for="<%= email.ClientID%>">Email</label>
+                <asp:TextBox ID="email" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
 
                 <i class="fa fa-key" aria-hidden="true"></i>
-                <label class="field-lable" for="pass">Password</label>
-                <input type="password" runat="server" id="pass" class="form-control" />
+                <label class="field-lable" for="<%= password.ClientID %>">Password</label>
+                <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
 
-                <div class="submit-btn-container">
-                    <input type="submit" value="Login" class="btn submit-btn"/>
-                </div>
+                <asp:Panel ID="panelLogin" runat="server" CssClass="submit-btn-container">
+                    <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn submit-btn" OnClick="btnLogin_Click" />
+                </asp:Panel>
+            </div>
+
+            <div class="row">
+                <asp:Panel CssClass="error-messages" HorizontalAlign="center" ID="errorsPanel" runat="server" Visable="false">
+                    <asp:Label ID="errorsLbl" runat="server"></asp:Label>
+                </asp:Panel>
             </div>
         </div>
     </div>
 </asp:Content>
+
+
