@@ -33,22 +33,22 @@ namespace CS412Final_Azzawie
         protected global::System.Web.UI.WebControls.TextBox price;
 
         /// <summary>
-        /// condidtion control.
+        /// condition control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList condidtion;
+        protected global::System.Web.UI.WebControls.DropDownList condition;
 
         /// <summary>
-        /// descrition control.
+        /// description control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox descrition;
+        protected global::System.Web.UI.WebControls.TextBox description;
 
         /// <summary>
         /// panelCreateAd control.

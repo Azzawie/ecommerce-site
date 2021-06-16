@@ -16,17 +16,17 @@
                 <asp:TextBox ID="price" runat="server" CssClass="form-control"></asp:TextBox>
 
                 <i class="fa fa-gift" aria-hidden="true"></i>
-                <label class="field-lable" for="condidtion">Condidtion</label>
+                <label class="field-lable" for="<%= condition.ClientID %>">Condition</label>
 
-                <asp:DropDownList ID="condidtion" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="condition" runat="server" CssClass="form-control">
                     <asp:ListItem Value="new" Text="New"></asp:ListItem>
                     <asp:ListItem Value="used" Text="Used"></asp:ListItem>
                     <asp:ListItem Value="damage" Text="Damage"></asp:ListItem>
                 </asp:DropDownList>
 
                 <i class="fa fa-list" aria-hidden="true"></i>
-                <label class="field-lable" for="<%= descrition.ClientID %>">Descrition</label>
-                <asp:TextBox ID="descrition" runat="server" CssClass="form-control" Rows="5"></asp:TextBox>
+                <label class="field-lable" for="<%= description.ClientID %>">Description</label>
+                <asp:TextBox ID="description" runat="server" CssClass="form-control" Rows="5"></asp:TextBox>
 
                 <asp:Panel ID="panelCreateAd" runat="server" CssClass="submit-btn-container">
                     <asp:Button ID="btnCreateAd" runat="server" Text="Publish" CssClass="btn submit-btn" OnClick="btnCreateAd_Click" />

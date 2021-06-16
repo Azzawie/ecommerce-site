@@ -33,9 +33,9 @@ namespace CS412Final_Azzawie
             }
 
             // Check if the descritiom field is empty
-            if (string.IsNullOrEmpty(descrition.Text))
+            if (string.IsNullOrEmpty(description.Text))
             {
-                errors.Add("Descrition field can't be empty !");
+                errors.Add("Description field can't be empty !");
             }
 
             // Display all errors if it's exist.
