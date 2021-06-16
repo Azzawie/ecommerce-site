@@ -11,6 +11,12 @@ namespace CS412Final_Azzawie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            // redirect to login if he is not loged in yet
+            if (!(Boolean)Session["signedIn"])
+            {
+                Response.Redirect("./login.aspx");
+            }
+
             // Don't show the errors panel when the page load.
             errorsPanel.Visible = false;
         }
