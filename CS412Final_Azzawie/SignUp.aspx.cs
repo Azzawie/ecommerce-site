@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS412Final_Azzawie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,6 +12,8 @@ namespace CS412Final_Azzawie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Session["signedIn"] = false;
+
             // Don't show the errors panel when the page load.
             errorsPanel.Visible = false;
         }
@@ -107,6 +110,9 @@ namespace CS412Final_Azzawie
                 return;
             }
 
+
+            // Here we should create a user in the database
+            Session["signedIn"] = true;
             // If there are no errors then we redirect to the home page.
             Response.Redirect("./Home.aspx");
         }

@@ -13,5 +13,10 @@ namespace CS412Final_Azzawie
         {
 
         }
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session["signedIn"] = false;
+            Response.Redirect("./Home.aspx");
+        }
     }
 }
