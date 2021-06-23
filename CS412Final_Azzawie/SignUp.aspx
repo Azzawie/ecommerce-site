@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Login.Master" AutoEventWireup="true" CodeBehind="SignUp.aspx.cs" Inherits="CS412Final_Azzawie.SignUp" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<title>Sign Up</title>
+    <title>Sign Up</title>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container-fluid pt-5">
@@ -9,72 +9,79 @@
             <div class="col-md-3">
                 <div class="form-content">
                     <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                    <label class="field-lable" for="first">First Name</label>
-                    <input type="text" id="first" class="form-control" />
+                    <label id="firstLbl" class="field-lable" for="<%= first.ClientID%>">First Name</label>
+                    <asp:TextBox ID="first" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                    <label class="field-lable" for="last">Last Name</label>
-                    <input type="text" id="last" class="form-control" />
+                    <label class="field-lable" for="<%= last.ClientID%>">Last Name</label>
+                    <asp:TextBox ID="last" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class="fa fa-phone" aria-hidden="true"></i>
-                    <label class="field-lable" for="phone">Phone Number</label>
-                    <input type="tel" id="phone" class="form-control" />
+                    <label id="phoneLbl" class="field-lable" for="<%= phone.ClientID%>">Phone Number</label>
+                    <asp:TextBox ID="phone" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
 
                     <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <label class="field-lable" for="dob">Date of Birth</label>
-                    <input type="date" id="dob" class="form-control" />
+                    <label id="dobLbl" class="field-lable" for="<%= dob.ClientID%>">Date of Birth</label>
+                    <asp:TextBox ID="dob" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div class="form-content">
                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                    <label class="field-lable" for="email">Email</label>
-                    <input type="email" id="email" class="form-control" />
+                    <label class="field-lable" for="<%= email.ClientID%>">Email</label>
+                    <asp:TextBox ID="email" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
 
                     <i class="fa fa-key" aria-hidden="true"></i>
-                    <label class="field-lable" for="pass">Password</label>
-                    <input type="password" id="pass" class="form-control" />
+                    <label class="field-lable" for="<%= password.ClientID%>">Password</label>
+                    <asp:TextBox ID="password" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
 
                     <i class="fa fa-key" aria-hidden="true"></i>
-                    <label class="field-lable" for="vpass">Verify Password</label>
-                    <input type="password" id="vpass" class="form-control" />
+                    <label class="field-lable" for="<%= vpassword.ClientID%>">Verify Password</label>
+                    <asp:TextBox ID="vpassword" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                 </div>
             </div>
+
             <div class="col-md-3">
                 <div>
                     <i class='fa fa-building	'></i>
-                    <label class="field-lable" for="city">City</label>
-                    <input type="text" id="city" class="form-control" />
+                    <label class="field-lable" for="<%= city.ClientID%>">City</label>
+                    <asp:TextBox ID="city" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class="fa fa-flag-o" aria-hidden="true"></i>
-                    <label class="field-lable" for="state">State</label>
-                    <input type="text" id="state" class="form-control" />
+                    <label class="field-lable" for="<%= state.ClientID%>">State</label>
+                    <asp:TextBox ID="state" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class='fa fa-qrcode'></i>
-                    <label class="field-lable" for="zipCode">Zipcode Number</label>
-                    <input type="text" id="zipCode" class="form-control" />
+                    <label class="field-lable" for="<%= zipCode.ClientID%>">Zipcode Number</label>
+                    <asp:TextBox ID="zipCode" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
 
             <div class="col-md-3">
                 <div>
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    <label class="field-lable" for="street1">Address 1</label>
-                    <input type="text" id="street1" class="form-control" />
+                    <label class="field-lable" for="<%= street1.ClientID%>">Address 1</label>
+                    <asp:TextBox ID="street1" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    <label class="field-lable" for="street2">Address 2</label>
-                    <input type="text" id="street2" class="form-control" />
+                    <label class="field-lable" for="<%= street2.ClientID%>">Address 2</label>
+                    <asp:TextBox ID="street2" runat="server" CssClass="form-control"></asp:TextBox>
 
                     <i class="fa fa-home"></i>
-                    <label class="field-lable" for="unitNumber">Unit Number</label>
-                    <input type="text" id="unitNumber" class="form-control" />
+                    <label class="field-lable" for="<%= unitNumber.ClientID%>">Unit Number</label>
+                    <asp:TextBox ID="unitNumber" runat="server" CssClass="form-control"></asp:TextBox>
                 </div>
             </div>
-            <div class="submit-btn-container">
-                <input type="submit" value="Sign Up" class="btn submit-btn" />
-            </div>
+
+            <asp:Panel ID="panelSignup" runat="server" CssClass="submit-btn-container">
+                <asp:Button ID="btnSignup" runat="server" Text="Sign Up" CssClass="btn submit-btn" OnClick="btnSignup_Click" />
+            </asp:Panel>
+        </div>
+        <div class="row">
+            <asp:Panel CssClass="error-messages" HorizontalAlign="center" ID="errorsPanel" runat="server" Visable="false">
+                <asp:Label ID="errorsLbl" runat="server"></asp:Label>
+            </asp:Panel>
         </div>
     </div>
 </asp:Content>

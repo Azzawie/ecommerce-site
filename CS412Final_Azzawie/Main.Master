@@ -42,7 +42,7 @@
                         </li>
 
                         <!-- NOTE:: WE NEED A CONDITION TO SHOW WHEN USER LOGED IN / HIDE THIS MENU WHEN NO ONE LOGED IN -->
-                        <li class="nav-item dropdown">
+                        <li class="nav-item dropdown" runat="server" id="userAds">
                             <a class="nav-link dropdown-toggle" href="#" id="user-ads" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">User Ads
                             </a>
 
@@ -69,20 +69,19 @@
                             </a>
 
                             <div class="dropdown-menu" id="user-nav-dropdown" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="Login.aspx" runat="server" id="loginLink">
+                                                                <a class="dropdown-item" href="Login.aspx" runat="server" id="loginLink">
                                     <i class="fa fa-sign-in" aria-hidden="true"></i>
                                     Login
                                 </a>
 
-                                <a class="dropdown-item" href="SignUp.aspx">
+                                <a id="btnSignup" runat="server" class="dropdown-item" href="SignUp.aspx">
                                     <i class="fa fa-user-plus" aria-hidden="true"></i>
                                     Sign Up
                                 </a>
 
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                <a id="btnLogout" class="dropdown-item" href="#" runat="server" onserverclick="btnLogout_Click" ><i class="fa fa-sign-out" aria-hidden="true"></i>
                                     Logout
-                                </a>
+                                </a>  
                             </div>
                         </li>
                     </ul>

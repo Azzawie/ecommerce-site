@@ -3,50 +3,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <!-- This page will hold all the ads belongs to the loged in user-->
     <div class="card-deck">
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
+        <asp:Repeater ID="publicAds" runat="server" OnItemDataBound="publicAds_ItemDataBound">
+            <ItemTemplate>
+                <div class="card">
+                    <!-- <img src="..." class="card-img-top" alt="...">-->
+                    <span class="custom-badge">
+                        <asp:Label ID="conition" runat="server" Text="Label"></asp:Label>
+                    </span>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <asp:Label ID="title" runat="server" Text="Label"></asp:Label>
+                        </h5>
 
-                <h5 class="card-title">Iphone for sell</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
 
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
-        <div class="card">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
-        </div>
+                        <p class="card-text">
+                            <asp:Label ID="desc" runat="server" Text="Label"></asp:Label>
+                        </p>
+                    </div>
+
+                    <div class="card-footer">
+                        <small class="text-muted">$
+                            <asp:Label ID="price" runat="server" Text="Label"></asp:Label>
+                        </small>
+                    </div>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
     </div>
-
 </asp:Content>

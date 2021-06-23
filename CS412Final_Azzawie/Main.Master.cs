@@ -11,7 +11,25 @@ namespace CS412Final_Azzawie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if ((Boolean)Session["signedIn"])
+            {
+                userAds.Visible = true;
+                btnLogout.Visible = true;
+                loginLink.Visible = false;
+                btnSignup.Visible = false;
+            }
+            else
+            {
+                userAds.Visible = false;
+                btnLogout.Visible = false;
+                loginLink.Visible = true;
+                btnSignup.Visible = true;
+            }
+        }
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            Session["signedIn"] = false;
+            Response.Redirect("./Home.aspx");
         }
     }
 }

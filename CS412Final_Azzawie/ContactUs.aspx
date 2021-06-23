@@ -8,24 +8,30 @@
         <div class="row">
             <div class="form-content bordered-card" id="contact-us-block">
                 <i class="fa fa-address-card-o" aria-hidden="true"></i>
-                <label class="field-lable" for="name">Name</label>
-                <input type="text" id="name" class="form-control" />
+                <label class="field-lable" for="<%= name.ClientID%>">Name</label>
+                <asp:TextBox ID="name" runat="server" CssClass="form-control"></asp:TextBox>
 
                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                <label class="field-lable" for="email">Email</label>
-                <input type="email" id="email" class="form-control" />
+                <label class="field-lable" for="<%= email.ClientID%>">Email</label>
+                <asp:TextBox ID="email" runat="server" CssClass="form-control" TextMode="Email"></asp:TextBox>
 
                 <i class="fa fa-phone" aria-hidden="true"></i>
-                <label class="field-lable" for="phone">Phone</label>
-                <input type="tel" id="phone" class="form-control" />
+                <label class="field-lable" for="<%= phone.ClientID%>">Phone</label>
+                <asp:TextBox ID="phone" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
 
                 <i class="fa fa-commenting-o" aria-hidden="true"></i>
-                <label class="field-lable" for="comment">Comments</label>
-                <textarea id="comment" rows="5" class="form-control"></textarea>
+                <label class="field-lable" for="<%= comment.ClientID%>">Comments</label>
+                <asp:TextBox ID="comment" runat="server" CssClass="form-control" TextMode="Email" Rows="5"></asp:TextBox>
 
-                <div class="submit-btn-container">
-                    <input type="submit" value="Send" class="btn submit-btn" />
-                </div>
+                <asp:Panel ID="panelContactUs" runat="server" CssClass="submit-btn-container">
+                    <asp:Button ID="btnContactUs" runat="server" Text="Send" CssClass="btn submit-btn" OnClick="btnContactUs_Click" />
+                </asp:Panel>
+            </div>
+
+            <div class="row">
+                <asp:Panel CssClass="error-messages" HorizontalAlign="center" ID="errorsPanel" runat="server" Visable="false">
+                    <asp:Label ID="errorsLbl" runat="server"></asp:Label>
+                </asp:Panel>
             </div>
         </div>
     </div>
