@@ -167,7 +167,6 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="MyAds.aspx" />
     <Content Include="CreateAd.aspx" />
     <Content Include="UserAds.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -269,13 +268,6 @@
     </Compile>
     <Compile Include="AboutUs.aspx.designer.cs">
       <DependentUpon>AboutUs.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MyAds.aspx.cs">
-      <DependentUpon>MyAds.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MyAds.aspx.designer.cs">
-      <DependentUpon>MyAds.aspx</DependentUpon>
     </Compile>
     <Compile Include="CreateAd.aspx.cs">
       <DependentUpon>CreateAd.aspx</DependentUpon>
