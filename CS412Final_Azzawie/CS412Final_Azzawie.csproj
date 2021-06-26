@@ -206,6 +206,8 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BLL\AdBLL.cs" />
+    <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DAL\AdDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Global.asax.cs">
@@ -243,6 +245,10 @@
     <Compile Include="LogIn.aspx.designer.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reopsitories\AdRepository.cs" />
+    <Compile Include="Reopsitories\Interfaces\IAdRepository.cs" />
+    <Compile Include="Reopsitories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Reopsitories\UserRepository.cs" />
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -288,8 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="BLL\" />
-    <Folder Include="Reopsitories\Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
