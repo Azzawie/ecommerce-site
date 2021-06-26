@@ -12,13 +12,13 @@ namespace CS412Final_Azzawie
         protected void Page_Load(object sender, EventArgs e)
         {
             // redirect to login if he is not loged in yet
-            if (!(Boolean)Session["signedIn"])
+            if (!Login.userSignedIn())
             {
                 Response.Redirect("./login.aspx");
             }
 
             // Don't show the errors panel when the page load.
-            errorsPanel.Visible = false;
+            msgPanel.Visible = false;
         }
 
         protected void btnCreateAd_Click(object sender, EventArgs e)
@@ -47,9 +47,9 @@ namespace CS412Final_Azzawie
             // Display all errors if it's exist.
             if (errors.Count > 0)
             {
-                errorsPanel.Visible = true;
-                errorsPanel.BorderColor = System.Drawing.Color.Red;
-                errorsLbl.Text = string.Join("</br>", errors);
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Red;
+                msgLbl.Text = string.Join("</br>", errors);
                 return;
             }
 

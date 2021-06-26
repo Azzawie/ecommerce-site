@@ -169,6 +169,8 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
     <Content Include="CreateAd.aspx" />
     <Content Include="UserAds.aspx" />
+    <Content Include="ShowAd.aspx" />
+    <Content Include="EditAd.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -282,6 +284,20 @@
     </Compile>
     <Compile Include="UserAds.aspx.designer.cs">
       <DependentUpon>UserAds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAd.aspx.cs">
+      <DependentUpon>ShowAd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAd.aspx.designer.cs">
+      <DependentUpon>ShowAd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditAd.aspx.cs">
+      <DependentUpon>EditAd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditAd.aspx.designer.cs">
+      <DependentUpon>EditAd.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

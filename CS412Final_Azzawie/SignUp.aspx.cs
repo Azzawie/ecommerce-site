@@ -15,7 +15,7 @@ namespace CS412Final_Azzawie
             Session["signedIn"] = false;
 
             // Don't show the errors panel when the page load.
-            errorsPanel.Visible = false;
+            msgPanel.Visible = false;
         }
 
         protected void btnSignup_Click(object sender, EventArgs e)
@@ -104,9 +104,9 @@ namespace CS412Final_Azzawie
             // Display all errors if it's exist.
             if (errors.Count > 0)
             {
-                errorsPanel.Visible = true;
-                errorsPanel.BorderColor = System.Drawing.Color.Red;
-                errorsLbl.Text = string.Join("</br>", errors);
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Red;
+                msgLbl.Text = string.Join("</br>", errors);
                 return;
             }
 

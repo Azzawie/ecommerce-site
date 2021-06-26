@@ -14,9 +14,10 @@ namespace CS412Final_Azzawie
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
+            Session["user"] = null;
 
             // Don't show the errors panel when the page load.
-            errorsPanel.Visible = false;
+            msgPanel.Visible = false;
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -57,9 +58,21 @@ namespace CS412Final_Azzawie
                         Password = "12345678"
                     };
 
+                    // upload the user object to the session 
+                    Session["user"] = user;
+                    
+                    // flag the user signed in
                     Session["signedIn"] = true;
-                    // If there are no errors then we redirect to the home page.
-                    Response.Redirect("./Home.aspx");
+                    
+                    // Show welcome message 
+                    msgPanel.Visible = true;
+                    msgPanel.BorderColor = System.Drawing.Color.Green;
+                    msgLbl.Text = $"Welcome back {user.First}.";
+                    msgLbl.ForeColor = System.Drawing.Color.Green;
+
+                    // Wait for 3 sec so user can read the message
+                    // and then redirect to the home page 
+                    Response.AddHeader("REFRESH", "3;URL=Home.aspx");
                 }
                 else
                 {
@@ -70,9 +83,9 @@ namespace CS412Final_Azzawie
             // Display all errors if it's exist.
             if (errors.Count > 0)
             {
-                errorsPanel.Visible = true;
-                errorsPanel.BorderColor = System.Drawing.Color.Red;
-                errorsLbl.Text = string.Join("</br>", errors);
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Red;
+                msgLbl.Text = string.Join("</br>", errors);
                 return;
             }
         }

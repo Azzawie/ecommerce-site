@@ -11,7 +11,12 @@ namespace CS412Final_Azzawie
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((Boolean)Session["signedIn"])
+            userActions();
+        }
+
+        public void userActions()
+        {
+            if (userSignedIn())
             {
                 userAds.Visible = true;
                 btnLogout.Visible = true;
@@ -27,9 +32,19 @@ namespace CS412Final_Azzawie
             }
         }
 
+        public static bool userSignedIn()
+        {
+            return (bool)HttpContext.Current.Session["signedIn"] == true;
+        }
+
         protected void btnLogout_Click(object sender, EventArgs e)
         {
+            // remove the user from the session
+            Session["user"] = null;
+
+            // flag the user as signed out
             Session["signedIn"] = false;
+
             Response.Redirect("./Home.aspx");
         }
     }
