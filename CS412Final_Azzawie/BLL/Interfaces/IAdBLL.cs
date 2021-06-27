@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace CS412Final_Azzawie.Reopsitories.Interfaces
+namespace CS412Final_Azzawie.BLL.Interfaces
 {
-    public interface IAdRepository
+    public interface IAdBLL
     {
         List<Ad> GetAds();
     }

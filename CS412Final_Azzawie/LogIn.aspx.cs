@@ -1,4 +1,6 @@
-﻿using CS412Final_Azzawie.Models;
+﻿using CS412Final_Azzawie.BLL;
+using CS412Final_Azzawie.BLL.Interfaces;
+using CS412Final_Azzawie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,9 @@ namespace CS412Final_Azzawie
 
     public partial class LogIn : System.Web.UI.Page
     {
+        private readonly IUserBLL _userBLL = new UserBLL();
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
@@ -40,30 +45,16 @@ namespace CS412Final_Azzawie
 
             if (errors.Count == 0)
             {
-                // will do something like 
-                // user = SELECT * FROM User WHERE Email= email.text AND Password = password.text;
-                bool foundInDatabase = false;
+                User user = _userBLL.GetUser(email.Text.Trim().ToLower(), password.Text);
 
-                if (email.Text.ToLower() == "mmakialazzaw@neiu.edu" && password.Text == "123456789")
+                if (user != null)
                 {
-                    foundInDatabase = true;
-                }
-                if (foundInDatabase)
-                {
-                    User user = new User()
-                    {
-                        First = "Mustafa",
-                        Last = "Azzawie",
-                        Email = "Mmakialazzaw@neiu.edu",
-                        Password = "12345678"
-                    };
-
                     // upload the user object to the session 
                     Session["user"] = user;
-                    
+
                     // flag the user signed in
                     Session["signedIn"] = true;
-                    
+
                     // Show welcome message 
                     msgPanel.Visible = true;
                     msgPanel.BorderColor = System.Drawing.Color.Green;
