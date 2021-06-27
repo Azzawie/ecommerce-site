@@ -53,8 +53,15 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            // If there are no errors then we redirect to the home page.
-            Response.Redirect("./Home.aspx");
+            // If there are no errors then we send an email to the admin.
+            msgPanel.Visible = true;
+            msgPanel.BorderColor = System.Drawing.Color.Green;
+            msgLbl.Text = "Ad created successfully";
+            msgLbl.ForeColor = System.Drawing.Color.Green;
+
+            // Wait for 3 sec so user can read the message
+            // and then redirect to the Show ad page 
+            Response.AddHeader("REFRESH", "3;URL=ShowAd.aspx");
         }
     }
 }

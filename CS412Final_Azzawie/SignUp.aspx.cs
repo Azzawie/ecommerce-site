@@ -13,6 +13,7 @@ namespace CS412Final_Azzawie
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
+            Session["user"] = null;
 
             // Don't show the errors panel when the page load.
             msgPanel.Visible = false;
@@ -110,11 +111,29 @@ namespace CS412Final_Azzawie
                 return;
             }
 
+            User user = new User()
+            {
+                First = "Mustafa",
+                Last = "Azzawie",
+                Email = "Mmakialazzaw@neiu.edu",
+                Password = "12345678"
+            };
 
-            // Here we should create a user in the database
+            // upload the user object to the session 
+            Session["user"] = user;
+
+            // flag the user signed in
             Session["signedIn"] = true;
-            // If there are no errors then we redirect to the home page.
-            Response.Redirect("./Home.aspx");
+
+            // Show welcome message 
+            msgPanel.Visible = true;
+            msgPanel.BorderColor = System.Drawing.Color.Green;
+            msgLbl.Text = $"Welcome back {user.First}.";
+            msgLbl.ForeColor = System.Drawing.Color.Green;
+
+            // Wait for 3 sec so user can read the message
+            // and then redirect to the home page 
+            Response.AddHeader("REFRESH", "3;URL=Home.aspx");
         }
     }
 }

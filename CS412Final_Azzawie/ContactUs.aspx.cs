@@ -55,6 +55,7 @@ namespace CS412Final_Azzawie
             }
 
             // If there are no errors then we send an email to the admin.
+
             msgPanel.Visible = true;
             msgPanel.BorderColor = System.Drawing.Color.Green;
             msgLbl.Text = "Thank you for your message, Someone from our team will contact you soon.";

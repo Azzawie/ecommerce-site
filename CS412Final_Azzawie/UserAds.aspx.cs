@@ -65,7 +65,7 @@ namespace CS412Final_Azzawie
             if (Page.IsPostBack == false)
             {
                 // redirect to login if he is not loged in yet
-                if (!(bool)Session["signedIn"])
+                if (!Login.userSignedIn())
                 {
                     Response.Redirect("./login.aspx");
                 }

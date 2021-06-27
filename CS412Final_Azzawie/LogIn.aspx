@@ -21,7 +21,7 @@
             </div>
 
             <div class="row">
-                <asp:Panel CssClass="error-messages" HorizontalAlign="center" ID="msgPanel" runat="server" Visable="false">
+                <asp:Panel CssClass="msgs-panel" HorizontalAlign="center" ID="msgPanel" runat="server" Visable="false">
                     <asp:Label ID="msgLbl" runat="server"></asp:Label>
                 </asp:Panel>
             </div>

@@ -13,5 +13,23 @@ namespace CS412Final_Azzawie
 
     public partial class ShowAd
     {
+
+        /// <summary>
+        /// msgPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel msgPanel;
+
+        /// <summary>
+        /// msgLbl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label msgLbl;
     }
 }

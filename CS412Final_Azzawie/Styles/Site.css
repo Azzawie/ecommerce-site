@@ -100,7 +100,7 @@ a {
     margin: 8px 4px;
 }
 
-.error-messages {
+.msgs-panel {
     color: red;
     border: 1px solid;
     border-radius: 15px;
