@@ -14,5 +14,9 @@ namespace CS412Final_Azzawie.Reopsitories
         {
             return AdDAL.GetAds();
         }
+        public List<Ad> GetUserAds()
+        {
+            return AdDAL.GetUserAds();
+        }
     }
 }

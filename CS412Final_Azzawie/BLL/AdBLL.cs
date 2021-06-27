@@ -21,5 +21,9 @@ namespace CS412Final_Azzawie.BLL
         {
             return _adRepository.GetAds();
         }
+        public List<Ad> GetUserAds()
+        {
+            return _adRepository.GetUserAds();
+        }
     }
 }

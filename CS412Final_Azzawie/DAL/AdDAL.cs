@@ -61,7 +61,7 @@ namespace CS412Final_Azzawie.DAL
                 new Ad(){
                     User = new User()
                     {
-                        Id=4,
+                        Id=1,
                         First= "first_4",
                         Last= "last_4",
                         Email="email_4@neiu.edu",
@@ -104,7 +104,7 @@ namespace CS412Final_Azzawie.DAL
                     Condition = "Used"
                 },
         };
-        
+
         // Get the list of the ads
         public static List<Ad> GetAds()
         {
@@ -114,8 +114,15 @@ namespace CS412Final_Azzawie.DAL
         // Get the list of ads where user id == to this user id
         public static List<Ad> GetUserAds()
         {
-            return _Ads;
+            List<Ad> Ads = new List<Ad>() { };
+            foreach (Ad i in _Ads)
+            {
+                if (i.User.Id == 1)
+                {
+                    Ads.Add(i);
+                }
+            }
+            return Ads;
         }
-
     }
 }

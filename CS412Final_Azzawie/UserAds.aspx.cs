@@ -23,7 +23,7 @@ namespace CS412Final_Azzawie
                     Response.Redirect("./login.aspx");
                 }
 
-                ViewState["userAds"] = _AdBLL.GetAds();
+                ViewState["userAds"] = _AdBLL.GetUserAds();
                 BindRepeater();
             }
         }

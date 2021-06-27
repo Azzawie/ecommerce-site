@@ -9,5 +9,6 @@ namespace CS412Final_Azzawie.Reopsitories.Interfaces
     public interface IAdRepository
     {
         List<Ad> GetAds();
+        List<Ad> GetUserAds();
     }
 }

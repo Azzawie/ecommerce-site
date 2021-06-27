@@ -9,5 +9,6 @@ namespace CS412Final_Azzawie.BLL.Interfaces
     public interface IAdBLL
     {
         List<Ad> GetAds();
+        List<Ad> GetUserAds();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CS412Final_Azzawie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -32,12 +33,19 @@ namespace CS412Final_Azzawie
             }
         }
 
-        public bool userSignedIn()
+        public static bool userSignedIn()
         {
-            return (bool)Session["signedIn"] == true ? true : false;
+            bool signedIn = false;
+            if ((HttpContext.Current.Session["signedIn"] != null) && ((bool)HttpContext.Current.Session["signedIn"] == true))
+            {
+                signedIn = true;
+            }
+            return signedIn;
         }
-        
-
+        public static User currentUser()
+        {
+            return (User)HttpContext.Current.Session["user"];
+        }
         protected void btnLogout_Click(object sender, EventArgs e)
         {
             // remove the user from the session
