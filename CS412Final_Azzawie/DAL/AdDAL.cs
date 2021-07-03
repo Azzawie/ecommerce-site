@@ -166,5 +166,18 @@ namespace CS412Final_Azzawie.DAL
             }
             return ad;
         }
+
+        public static Ad GetUserAd(int Id)
+        {
+            Ad ad = new Ad();
+            foreach (Ad i in _Ads)
+            {
+                if (Id == i.Id)
+                {
+                    ad = i;
+                };
+            }
+            return ad;
+        }
     }
 }

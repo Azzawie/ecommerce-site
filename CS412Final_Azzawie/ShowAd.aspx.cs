@@ -30,8 +30,11 @@ namespace CS412Final_Azzawie
             // Don't show the errors panel when the page load.
             msgPanel.Visible = false;
 
+            // Getting the id frem the page params
+            int id = int.Parse(Request["id"]);
+
             // Getting the user ad from the database
-            Ad ad = _AdBLL.GetUserAd();
+            Ad ad = _AdBLL.GetUserAd(id);
 
             title.Text = ad.Title;
             price.Text = ad.Price.ToString();

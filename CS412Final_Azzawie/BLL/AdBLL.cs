@@ -25,9 +25,9 @@ namespace CS412Final_Azzawie.BLL
         {
             return _adRepository.GetUserAds();
         }
-        public Ad GetUserAd()
+        public Ad GetUserAd(int Id)
         {
-            return _adRepository.GetUserAd();
+            return _adRepository.GetUserAd(Id);
         }
         public Ad CreateAd(Ad ad)
         {

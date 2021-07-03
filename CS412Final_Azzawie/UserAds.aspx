@@ -6,9 +6,10 @@
     <div class="card-deck">
         <asp:Repeater ID="publicAds" runat="server" OnItemDataBound="publicAds_ItemDataBound">
             <ItemTemplate>
-                <a href="ShowAd.aspx" class="a-ad-click">
+                <a href="ShowAd.aspx?id=<%#adId+1%>" class="a-ad-click">
                     <div class="card">
                         <!-- <img src="..." class="card-img-top" alt="...">-->
+
                         <span class="custom-badge">
                             <asp:Label ID="conition" runat="server" Text="Label"></asp:Label>
                         </span>

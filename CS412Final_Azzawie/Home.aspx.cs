@@ -13,7 +13,7 @@ namespace CS412Final_Azzawie
     public partial class Home : System.Web.UI.Page
     {
         private readonly IAdBLL _AdBLL = new AdBLL();
-
+        public long adId { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -35,6 +35,7 @@ namespace CS412Final_Azzawie
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
             {
                 Ad ad = (Ad)e.Item.DataItem;
+                adId = ad.Id;
                 ((Label)e.Item.FindControl("title")).Text = ad.Title;
                 ((Label)e.Item.FindControl("price")).Text = ad.Price.ToString();
                 ((Label)e.Item.FindControl("desc")).Text = ad.Description;
