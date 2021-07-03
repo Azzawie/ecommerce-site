@@ -14,6 +14,6 @@ namespace CS412Final_Azzawie.Models
         public string Street1 { get; set; }
         public string Street2 { get; set; }
         public string ZipCode { get; set; }
-        public string UnitNymber { get; set; }
+        public string UnitNumber { get; set; }
     }
 }

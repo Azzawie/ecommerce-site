@@ -1,4 +1,6 @@
-﻿using CS412Final_Azzawie.Models;
+﻿using CS412Final_Azzawie.BLL;
+using CS412Final_Azzawie.BLL.Interfaces;
+using CS412Final_Azzawie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace CS412Final_Azzawie
 {
     public partial class ShowAd : System.Web.UI.Page
     {
+        private readonly IAdBLL _AdBLL = new AdBLL();
         protected void Page_Load(object sender, EventArgs e)
         {
             // Letthe user edit or delet the ad if he is logedin and he is the owner of the ad 
@@ -27,25 +30,11 @@ namespace CS412Final_Azzawie
             // Don't show the errors panel when the page load.
             msgPanel.Visible = false;
 
-            Ad ad = new Ad()
-            {
-                User = new User()
-                {
-                    Id = 1,
-                    First = "Mustafa",
-                    Last = "Azzawie",
-                    Email = "mmakialazzaw@neiu.edu",
-                    Phone = "1234567898"
-                },
-                Id = 1,
-                Title = "Iphone for sell",
-                Price = "120.5",
-                Description = "This is a brand new Iphone for sell, looking for good deal",
-                Condition = "New"
-            };
+            // Getting the user ad from the database
+            Ad ad = _AdBLL.GetUserAd();
 
             title.Text = ad.Title;
-            price.Text = ad.Price;
+            price.Text = ad.Price.ToString();
             condition.Text = ad.Condition;
             description.Text = ad.Description;
         }

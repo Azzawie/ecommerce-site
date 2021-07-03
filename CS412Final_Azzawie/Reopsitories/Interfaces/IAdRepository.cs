@@ -10,5 +10,6 @@ namespace CS412Final_Azzawie.Reopsitories.Interfaces
     {
         List<Ad> GetAds();
         List<Ad> GetUserAds();
+        Ad GetUserAd();
     }
 }

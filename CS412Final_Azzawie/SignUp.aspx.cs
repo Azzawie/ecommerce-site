@@ -1,4 +1,6 @@
-﻿using CS412Final_Azzawie.Models;
+﻿using CS412Final_Azzawie.BLL;
+using CS412Final_Azzawie.BLL.Interfaces;
+using CS412Final_Azzawie.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace CS412Final_Azzawie
 {
     public partial class SignUp : System.Web.UI.Page
     {
+        private readonly IUserBLL _userBLL = new UserBLL();
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
@@ -111,13 +114,15 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            User user = new User()
-            {
-                First = "Mustafa",
-                Last = "Azzawie",
-                Email = "Mmakialazzaw@neiu.edu",
-                Password = "12345678"
-            };
+            // Create a new user from the user inputs
+            User user = _userBLL.CreateUser(new User()
+                {
+                    First = first.Text,
+                    Last = last.Text,
+                    Email = email.Text,
+                    Password = password.Text
+                }
+            );
 
             // upload the user object to the session 
             Session["user"] = user;

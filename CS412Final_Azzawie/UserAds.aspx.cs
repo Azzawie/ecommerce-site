@@ -42,7 +42,7 @@ namespace CS412Final_Azzawie
             {
                 Ad ad = (Ad)e.Item.DataItem;
                 ((Label)e.Item.FindControl("title")).Text = ad.Title;
-                ((Label)e.Item.FindControl("price")).Text = ad.Price;
+                ((Label)e.Item.FindControl("price")).Text = ad.Price.ToString();
                 ((Label)e.Item.FindControl("desc")).Text = ad.Description;
                 ((Label)e.Item.FindControl("conition")).Text = ad.Condition;
             }

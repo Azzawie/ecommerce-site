@@ -8,6 +8,24 @@ namespace CS412Final_Azzawie.DAL
 {
     public class AdDAL
     {
+
+        private static Ad _Ad = new Ad()
+        {
+            User = new User()
+            {
+                Id = 1,
+                First = "Mustafa",
+                Last = "Azzawie",
+                Email = "mmakialazzaw@neiu.edu",
+                Phone = "1234567898"
+            },
+            Id = 1,
+            Title = "Iphone for sell",
+            Price = 120.5m,
+            Description = "This is a brand new Iphone for sell, looking for good deal",
+            Condition = "New"
+        };
+
         private static List<Ad> _Ads = new List<Ad>()
             {
                 new Ad(){
@@ -21,7 +39,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 1,
                     Title ="Iphone for sell",
-                    Price = "120.5",
+                    Price = 120.5m,
                     Description = "This is a brand new Iphone for sell, looking for good deal",
                     Condition = "New"
                 },
@@ -37,7 +55,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 2,
                     Title ="Piano for sell",
-                    Price = "220.5",
+                    Price = 220.5m,
                     Description = "This is a brand new Piano for sell, looking for good deal",
                     Condition = "New"
                 },
@@ -53,7 +71,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 3,
                     Title ="Swimming pool",
-                    Price = "90.0",
+                    Price = 90.0m,
                     Description = "Swimming pool, looking for good deal",
                     Condition = "Used"
                 },
@@ -69,7 +87,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 4,
                     Title ="Dron for sell",
-                    Price = "520.0",
+                    Price = 520.0m,
                     Description = "This is a brand new Dron for sell, looking for good deal",
                     Condition = "New"
                 },
@@ -84,7 +102,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 5,
                     Title ="Samsung for sell",
-                    Price = "110.0",
+                    Price = 110.0m,
                     Description = "New Samsung for sell",
                     Condition = "New"
                 },
@@ -99,7 +117,7 @@ namespace CS412Final_Azzawie.DAL
                     },
                     Id= 6,
                     Title ="football for sell",
-                    Price = "50.00",
+                    Price = 50.00m,
                     Description = "Used football in a good condition for sell",
                     Condition = "Used"
                 },
