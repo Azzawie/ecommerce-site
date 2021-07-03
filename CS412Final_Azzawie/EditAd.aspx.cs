@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CS412Final_Azzawie.BLL;
+using CS412Final_Azzawie.BLL.Interfaces;
+using CS412Final_Azzawie.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +12,7 @@ namespace CS412Final_Azzawie
 {
     public partial class EditAd : System.Web.UI.Page
     {
+        private readonly IAdBLL _adBLL = new AdBLL();
         protected void Page_Load(object sender, EventArgs e)
         {
             // redirect to login if he is not loged in yet
@@ -52,7 +56,16 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            // If there are no errors then we send an email to the admin.
+            // If there are no errors then we update the ad
+            Ad ad = _adBLL.UpdateAd(new Ad()
+            {
+                Title = title.Text,
+                Price = decimal.Parse(price.Text),
+                Description = description.Text,
+                Condition = condition.Text
+            }
+            );
+
             msgPanel.Visible = true;
             msgPanel.BorderColor = System.Drawing.Color.Green;
             msgLbl.Text = "Ad created successfully";

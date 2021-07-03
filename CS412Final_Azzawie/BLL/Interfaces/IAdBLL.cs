@@ -11,5 +11,7 @@ namespace CS412Final_Azzawie.BLL.Interfaces
         List<Ad> GetAds();
         List<Ad> GetUserAds();
         Ad GetUserAd();
+        Ad CreateAd(Ad ad);
+        Ad UpdateAd(Ad ad);
     }
 }

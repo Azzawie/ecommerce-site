@@ -142,5 +142,29 @@ namespace CS412Final_Azzawie.DAL
             }
             return Ads;
         }
+
+        // Create new ad
+        public static Ad CreateAd(Ad ad)
+        {
+            Ad lastAd = _Ads.LastOrDefault();
+            ad.Id = lastAd.Id + 1;
+            _Ads.Add(ad);
+            return ad;
+        }
+        // Update an ad
+        public static Ad UpdateAd(Ad ad)
+        {
+            foreach (Ad i in _Ads)
+            {
+                if (ad.Id == i.Id)
+                {
+                    i.Title = ad.Title;
+                    i.Price = ad.Price;
+                    i.Description = ad.Description;
+                    i.Condition = ad.Condition;
+                };
+            }
+            return ad;
+        }
     }
 }
