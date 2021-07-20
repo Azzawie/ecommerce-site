@@ -1363,7 +1363,7 @@ if (typeof jQuery === 'undefined') {
 
     if ($.inArray(attrName, allowedAttributeList) !== -1) {
       if ($.inArray(attrName, uriAttrs) !== -1) {
-        return Boolean(attr.nodeValue.match(SAFE_URL_PATTERN) || attr.nodeValue.match(DATA_URL_PATTERN))
+        return bool(attr.nodeValue.match(SAFE_URL_PATTERN) || attr.nodeValue.match(DATA_URL_PATTERN))
       }
 
       return true

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Login.Master" AutoEventWireup="true" CodeBehind="CreateAd.aspx.cs" Inherits="CS412Final_Azzawie.CreateAd" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Login.Master" AutoEventWireup="true" CodeBehind="EditAd.aspx.cs" Inherits="CS412Final_Azzawie.EditAd" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -29,7 +29,7 @@
                 <asp:TextBox ID="description" runat="server" CssClass="form-control" Rows="5"></asp:TextBox>
 
                 <asp:Panel ID="panelCreateAd" runat="server" CssClass="submit-btn-container">
-                    <asp:Button ID="btnCreateAd" runat="server" Text="Publish" CssClass="btn submit-btn" OnClick="btnCreateAd_Click" />
+                    <asp:Button ID="btnEditAd" runat="server" Text="Publish" CssClass="btn submit-btn" OnClick="btnEditAd_Click" />
                 </asp:Panel>
             </div>
 

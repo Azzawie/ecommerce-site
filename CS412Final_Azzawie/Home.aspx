@@ -7,28 +7,31 @@
     <div class="card-deck">
         <asp:Repeater ID="publicAds" runat="server" OnItemDataBound="publicAds_ItemDataBound">
             <ItemTemplate>
-                <div class="card">
-                    <!-- <img src="..." class="card-img-top" alt="...">-->
-                    <span class="custom-badge">
-                        <asp:Label ID="conition" runat="server" Text="Label"></asp:Label>
-                    </span>
-                    <div class="card-body">
-                        <h5 class="card-title">
-                            <asp:Label ID="title" runat="server" Text="Label"></asp:Label>
-                        </h5>
+                <a href="ShowAd.aspx?id=<%#adId+1%>" class="a-ad-click">
+                    <div class="card">
+                        <!-- <img src="..." class="card-img-top" alt="...">-->
+
+                        <span class="custom-badge">
+                            <asp:Label ID="conition" runat="server" Text="Label"></asp:Label>
+                        </span>
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <asp:Label ID="title" runat="server" Text="Label"></asp:Label>
+                            </h5>
 
 
-                        <p class="card-text">
-                            <asp:Label ID="desc" runat="server" Text="Label"></asp:Label>
-                        </p>
-                    </div>
+                            <p class="card-text">
+                                <asp:Label ID="desc" runat="server" Text="Label"></asp:Label>
+                            </p>
+                        </div>
 
-                    <div class="card-footer">
-                        <small class="text-muted">$
+                        <div class="card-footer">
+                            <small class="text-muted">$
                             <asp:Label ID="price" runat="server" Text="Label"></asp:Label>
-                        </small>
+                            </small>
+                        </div>
                     </div>
-                </div>
+                </a>
             </ItemTemplate>
         </asp:Repeater>
     </div>

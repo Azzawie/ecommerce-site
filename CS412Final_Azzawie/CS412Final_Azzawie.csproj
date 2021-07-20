@@ -167,9 +167,10 @@
     <Content Include="fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="MyAds.aspx" />
     <Content Include="CreateAd.aspx" />
     <Content Include="UserAds.aspx" />
+    <Content Include="ShowAd.aspx" />
+    <Content Include="EditAd.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -206,6 +207,12 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="BLL\AdBLL.cs" />
+    <Compile Include="BLL\Interfaces\IAdBLL.cs" />
+    <Compile Include="BLL\Interfaces\IUserBLL.cs" />
+    <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="DAL\AdDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -241,6 +248,10 @@
     <Compile Include="LogIn.aspx.designer.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Reopsitories\AdRepository.cs" />
+    <Compile Include="Reopsitories\Interfaces\IAdRepository.cs" />
+    <Compile Include="Reopsitories\Interfaces\IUserRepository.cs" />
+    <Compile Include="Reopsitories\UserRepository.cs" />
     <Compile Include="SignUp.aspx.cs">
       <DependentUpon>SignUp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,13 +273,6 @@
     <Compile Include="AboutUs.aspx.designer.cs">
       <DependentUpon>AboutUs.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MyAds.aspx.cs">
-      <DependentUpon>MyAds.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MyAds.aspx.designer.cs">
-      <DependentUpon>MyAds.aspx</DependentUpon>
-    </Compile>
     <Compile Include="CreateAd.aspx.cs">
       <DependentUpon>CreateAd.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -282,6 +286,20 @@
     </Compile>
     <Compile Include="UserAds.aspx.designer.cs">
       <DependentUpon>UserAds.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowAd.aspx.cs">
+      <DependentUpon>ShowAd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowAd.aspx.designer.cs">
+      <DependentUpon>ShowAd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="EditAd.aspx.cs">
+      <DependentUpon>EditAd.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EditAd.aspx.designer.cs">
+      <DependentUpon>EditAd.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

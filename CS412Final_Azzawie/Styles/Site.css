@@ -100,24 +100,37 @@ a {
     margin: 8px 4px;
 }
 
-.error-messages {
+.msgs-panel {
     color: red;
     border: 1px solid;
     border-radius: 15px;
     padding-bottom: 28px;
     padding: 10px 3%;
     margin: 50px auto;
-    max-width:30% !important;
+    max-width: 30% !important;
 }
 
 .custom-badge {
     display: inline-block;
     min-width: 1em;
     padding: .3em;
-    margin:5px 5px;
+    margin: 5px 5px;
     border-radius: 50%;
     font-size: 13px;
     text-align: center;
     background: #1779ba;
     color: #fefefe;
 }
+
+
+.a-ad-click {
+    color: black !important;
+    text-decoration: none;
+    background-color: white;
+}
+
+    .a-ad-click:hover {
+        color: black !important;
+        text-decoration: none;
+        background-color: white !important;
+    }

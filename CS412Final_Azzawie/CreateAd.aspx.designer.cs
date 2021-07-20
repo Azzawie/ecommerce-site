@@ -69,21 +69,21 @@ namespace CS412Final_Azzawie
         protected global::System.Web.UI.WebControls.Button btnCreateAd;
 
         /// <summary>
-        /// errorsPanel control.
+        /// msgPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel errorsPanel;
+        protected global::System.Web.UI.WebControls.Panel msgPanel;
 
         /// <summary>
-        /// errorsLbl control.
+        /// msgLbl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label errorsLbl;
+        protected global::System.Web.UI.WebControls.Label msgLbl;
     }
 }

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace CS412Final_Azzawie
 {
-    public partial class CreateAd : System.Web.UI.Page
+    public partial class EditAd : System.Web.UI.Page
     {
         private readonly IAdBLL _adBLL = new AdBLL();
         protected void Page_Load(object sender, EventArgs e)
@@ -24,8 +24,7 @@ namespace CS412Final_Azzawie
             // Don't show the errors panel when the page load.
             msgPanel.Visible = false;
         }
-
-        protected void btnCreateAd_Click(object sender, EventArgs e)
+        protected void btnEditAd_Click(object sender, EventArgs e)
         {
             // initiale a list which will contain all the errors (if exist).
             List<string> errors = new List<string>();
@@ -57,14 +56,14 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            // If there are no errors then we create the ad in the database.
-            Ad ad = _adBLL.CreateAd(new Ad()
-                {
-                    Title = title.Text,
-                    Price = decimal.Parse(price.Text),
-                    Description = description.Text,
-                    Condition = condition.Text
-                }
+            // If there are no errors then we update the ad
+            Ad ad = _adBLL.UpdateAd(new Ad()
+            {
+                Title = title.Text,
+                Price = decimal.Parse(price.Text),
+                Description = description.Text,
+                Condition = condition.Text
+            }
             );
 
             msgPanel.Visible = true;
