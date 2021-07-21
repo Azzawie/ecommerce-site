@@ -13,6 +13,9 @@ namespace CS412Final_Azzawie
     public partial class CreateAd : System.Web.UI.Page
     {
         private readonly IAdBLL _adBLL = new AdBLL();
+
+        private readonly INotificationsBLL _notifications = new NotificationsBLL();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             // redirect to login if he is not loged in yet
@@ -57,24 +60,42 @@ namespace CS412Final_Azzawie
                 return;
             }
 
+            User user = (User)HttpContext.Current.Session["user"];
+
             // If there are no errors then we create the ad in the database.
             Ad ad = _adBLL.CreateAd(new Ad()
-                {
-                    Title = title.Text,
-                    Price = decimal.Parse(price.Text),
-                    Description = description.Text,
-                    Condition = condition.Text
-                }
-            );
+            {
+                Title = title.Text,
+                Price = decimal.Parse(price.Text),
+                Description = description.Text,
+                Condition = condition.Text,
+                User = user
+            });
 
             msgPanel.Visible = true;
             msgPanel.BorderColor = System.Drawing.Color.Green;
             msgLbl.Text = "Ad created successfully";
             msgLbl.ForeColor = System.Drawing.Color.Green;
 
+            SendFeedback(user.First, user.Email, user.Phone, "Your ad has been created successfully.");
+
             // Wait for 3 sec so user can read the message
             // and then redirect to the Show ad page 
             Response.AddHeader("REFRESH", "3;URL=ShowAd.aspx");
+        }
+
+        public void SendFeedback(string userName, string userEmail, string phone, string comment)
+        {
+            string to = userEmail;
+            string subject = "New ad has been created successfully";
+            string replyTo = to;
+            string body = $@"
+                            <p>User Email: {userEmail}</p>
+                            <p>User Name: {userName}</p>
+                            <p>User Phone: {phone}</p>
+                            <p>User Comment:<br>{comment}</p>";
+
+            _notifications.SendEmail(to, subject, body, replyTo);
         }
     }
 }

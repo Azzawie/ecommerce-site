@@ -30,5 +30,10 @@ namespace CS412Final_Azzawie.BLL
         {
             return _userRepository.GetUser(email, password);
         }
+
+        public bool UserExists(string email)
+        {
+            return _userRepository.DoesUserExistByEmail(email);
+        }
     }
 }

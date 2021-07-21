@@ -250,7 +250,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="BLL\AdBLL.cs" />
     <Compile Include="BLL\Interfaces\IAdBLL.cs" />
+    <Compile Include="BLL\Interfaces\INotificationsBLL.cs" />
     <Compile Include="BLL\Interfaces\IUserBLL.cs" />
+    <Compile Include="BLL\NotificationsBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DAL\AdDAL.cs" />
     <Compile Include="DAL\UserDAL.cs" />

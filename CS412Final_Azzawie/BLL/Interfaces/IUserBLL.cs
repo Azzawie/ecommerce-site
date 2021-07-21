@@ -10,5 +10,6 @@ namespace CS412Final_Azzawie.BLL.Interfaces
     {
         User GetUser(string email, string password);
         User CreateUser(User user);
+        bool UserExists(string email);
     }
 }

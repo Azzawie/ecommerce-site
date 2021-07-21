@@ -13,6 +13,9 @@ namespace CS412Final_Azzawie
     public partial class SignUp : System.Web.UI.Page
     {
         private readonly IUserBLL _userBLL = new UserBLL();
+
+        private readonly INotificationsBLL _notifications = new NotificationsBLL();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
@@ -108,9 +111,26 @@ namespace CS412Final_Azzawie
             msgLbl.Text = $"Welcome back {user.First}.";
             msgLbl.ForeColor = System.Drawing.Color.Green;
 
+
+            SendFeedback(user.First, user.Email, user.Phone, $"Welcome {user.First} to sell & buy website");
+
             // Wait for 3 sec so user can read the message
             // and then redirect to the home page 
             Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+        }
+
+        public void SendFeedback(string userName, string userEmail, string phone, string comment)
+        {
+            string to = userEmail;
+            string subject = "Welcome to sell & buy website";
+            string replyTo = to;
+            string body = $@"
+                            <p>Your Email: {userEmail}</p>
+                            <p>Your Name: {userName}</p>
+                            <p>Your Phone: {phone}</p>
+                            <p>{comment}</p>";
+
+            _notifications.SendEmail(to, subject, body, replyTo);
         }
     }
 }
