@@ -16,7 +16,7 @@ namespace CS412Final_Azzawie.DAL
         public static User GetUser(string email, string password)
         {
             User user = null;
-            string sql = @"SELECT * FROM Users WHERE Email=@Email AND Password=@Password";
+            string sql = @"SELECT * FROM users WHERE Email=@Email AND Password=@Password";
             using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))
@@ -41,7 +41,6 @@ namespace CS412Final_Azzawie.DAL
                                         Password = reader.GetString("Password"),
                                         Phone = reader.GetString("Phone"),
                                         Dob = (DateTime)reader["Dob"]
-
                                     };
                                 }
                             }
@@ -58,7 +57,7 @@ namespace CS412Final_Azzawie.DAL
 
         public static User CreateUser(User user)
         {
-            string sql = @"INSERT INTO Users (First, Last, Email, Phone, Password, Dob) 
+            string sql = @"INSERT INTO users (First, Last, Email, Phone, Password, Dob) 
                             VALUES
                             (@First, @Last, @Email, @Phone, @Password, @Dob);
                             SELECT LAST_INSERT_ID();";
@@ -92,8 +91,8 @@ namespace CS412Final_Azzawie.DAL
 
         public static bool DoesUserExistByEmail(string email)
         {
-            bool ret = true;
-            string sql = @"SELECT * FROM Users WHERE Email=@Email";
+            bool ret = false;
+            string sql = @"SELECT * FROM users WHERE Email=@Email";
             using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, connection))

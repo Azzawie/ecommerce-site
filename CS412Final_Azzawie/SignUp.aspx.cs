@@ -78,6 +78,12 @@ namespace CS412Final_Azzawie
                 errors.Add("Password and password verification does not match !");
             }
 
+            bool doesUserAlreadyExist = _userBLL.UserExists(email.Text.Trim());
+            if (doesUserAlreadyExist)
+            {
+                errors.Add("User already exists. Please use a different email.");
+            }
+
             // Display all errors if it's exist.
             if (errors.Count > 0)
             {
@@ -87,36 +93,39 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            // Create a new user from the user inputs
-            User user = _userBLL.CreateUser(new User()
-                {
-                    First = first.Text,
-                    Last = last.Text,
-                    Email = email.Text,
-                    Password = password.Text,
-                    Phone = phone.Text,
-                    Dob = DateTime.Parse(dob.Text)
-                }
-            );
 
-            // upload the user object to the session 
-            Session["user"] = user;
+            User user = new User()
+            {
+                First = first.Text,
+                Last = last.Text,
+                Email = email.Text,
+                Password = password.Text,
+                Phone = phone.Text,
+                Dob = DateTime.Parse(dob.Text)
+            };
 
-            // flag the user signed in
-            Session["signedIn"] = true;
+            User newUser = _userBLL.CreateUser(user);
 
-            // Show welcome message 
-            msgPanel.Visible = true;
-            msgPanel.BorderColor = System.Drawing.Color.Green;
-            msgLbl.Text = $"Welcome back {user.First}.";
-            msgLbl.ForeColor = System.Drawing.Color.Green;
+            if (newUser != null)
+            {
+                Session["user"] = newUser;
+                Session["signedIn"] = true;
 
+                // Show welcome message 
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Green;
+                msgLbl.Text = $"Welcome {newUser.First}.";
+                msgLbl.ForeColor = System.Drawing.Color.Green;
 
-            SendFeedback(user.First, user.Email, user.Phone, $"Welcome {user.First} to sell & buy website");
-
-            // Wait for 3 sec so user can read the message
-            // and then redirect to the home page 
-            Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+                SendFeedback(newUser.First, newUser.Email, newUser.Phone, $"Welcome {newUser.First} to sell & buy website");
+                Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+            }
+            else
+            {
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Red;
+                msgLbl.Text = "Unable to create user. Please check your inputs and try again.";
+            }
         }
 
         public void SendFeedback(string userName, string userEmail, string phone, string comment)

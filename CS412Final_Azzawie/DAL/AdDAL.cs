@@ -56,7 +56,7 @@ namespace CS412Final_Azzawie.DAL
         public static List<Ad> GetUserAds(int UserId)
         {
             List<Ad> ads = new List<Ad>();
-            string sql = "SELECT * FROM ads a WHERE a.userId = @UserId";
+            string sql = "SELECT * FROM ads a WHERE a.UserId = @UserId";
 
             using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
@@ -96,7 +96,7 @@ namespace CS412Final_Azzawie.DAL
 
         public static Ad CreateAd(Ad ad)
         {
-            string sql = @"INSERT INTO ads (title, `condition` , description, price, userId) VALUES(@Title, @Condition, @Description, @Price, @UserId); SELECT LAST_INSERT_ID();";
+            string sql = @"INSERT INTO ads (Title, `Condition` , Description, Price, UserId) VALUES(@Title, @Condition, @Description, @Price, @UserId); SELECT LAST_INSERT_ID();";
 
             using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
@@ -126,7 +126,7 @@ namespace CS412Final_Azzawie.DAL
 
         public static Ad UpdateAd(Ad ad)
         {
-            string sql = @"UPDATE ads SET title = @Title, condition = @Condition , description = @Description, price = @Price WHERE id = @Id";
+            string sql = @"UPDATE ads SET Title = @Title, Condition = @Condition , Description = @Description, Price = @Price WHERE Id = @Id";
             using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
