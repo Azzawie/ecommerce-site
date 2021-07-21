@@ -75,36 +75,6 @@ namespace CS412Final_Azzawie
                 errors.Add("Password and password verification does not match !");
             }
 
-            // Check if the city field is empty
-            if (string.IsNullOrEmpty(city.Text))
-            {
-                errors.Add("City field can't be empty !");
-            }
-
-            // Check if the state field is empty
-            if (string.IsNullOrEmpty(state.Text))
-            {
-                errors.Add("State field can't be empty !");
-            }
-
-            // Check if the zipcode field is empty
-            if (string.IsNullOrEmpty(zipCode.Text))
-            {
-                errors.Add("Zip code field can't be empty !");
-            }
-
-            // Check if the street1 field is empty
-            if (string.IsNullOrEmpty(street1.Text))
-            {
-                errors.Add("street 1 field can't be empty !");
-            }
-
-            // Check if the unit number field is empty
-            if (string.IsNullOrEmpty(unitNumber.Text))
-            {
-                errors.Add("Unit number field can't be empty !");
-            }
-
             // Display all errors if it's exist.
             if (errors.Count > 0)
             {
@@ -120,7 +90,9 @@ namespace CS412Final_Azzawie
                     First = first.Text,
                     Last = last.Text,
                     Email = email.Text,
-                    Password = password.Text
+                    Password = password.Text,
+                    Phone = phone.Text,
+                    Dob = DateTime.Parse(dob.Text)
                 }
             );
 

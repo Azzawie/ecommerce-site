@@ -15,6 +15,5 @@ namespace CS412Final_Azzawie.Models
         public string Password { get; set; }
         public string Phone { get; set; }
         public DateTime Dob { get; set; }
-        public Address Address { get; set; }
     }
 }

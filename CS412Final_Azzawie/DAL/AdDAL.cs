@@ -3,179 +3,188 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MySql.Data.MySqlClient;
+using System.Web.Configuration;
+using CS412Final_Azzawie.Reopsitories.Interfaces;
+using CS412Final_Azzawie.Reopsitories;
 
 namespace CS412Final_Azzawie.DAL
 {
     public class AdDAL
     {
+        private readonly static IError _error = new Error();
 
-        private static Ad _Ad = new Ad()
-        {
-            User = new User()
-            {
-                Id = 1,
-                First = "Mustafa",
-                Last = "Azzawie",
-                Email = "mmakialazzaw@neiu.edu",
-                Phone = "1234567898"
-            },
-            Id = 1,
-            Title = "Iphone for sell",
-            Price = 120.5m,
-            Description = "This is a brand new Iphone for sell, looking for good deal",
-            Condition = "New"
-        };
-
-        private static List<Ad> _Ads = new List<Ad>()
-            {
-                new Ad(){
-                    User = new User()
-                    {
-                        Id=1,
-                        First= "first_1",
-                        Last= "last_1",
-                        Email="email_1@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 1,
-                    Title ="Iphone for sell",
-                    Price = 120.5m,
-                    Description = "This is a brand new Iphone for sell, looking for good deal",
-                    Condition = "New"
-                },
-
-                new Ad(){
-                    User = new User()
-                    {
-                        Id=2,
-                        First= "first_2",
-                        Last= "last_2",
-                        Email="emai2_1@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 2,
-                    Title ="Piano for sell",
-                    Price = 220.5m,
-                    Description = "This is a brand new Piano for sell, looking for good deal",
-                    Condition = "New"
-                },
-
-                new Ad(){
-                    User = new User()
-                    {
-                        Id=3,
-                        First= "first_3",
-                        Last= "last_3",
-                        Email="email_3@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 3,
-                    Title ="Swimming pool",
-                    Price = 90.0m,
-                    Description = "Swimming pool, looking for good deal",
-                    Condition = "Used"
-                },
-
-                new Ad(){
-                    User = new User()
-                    {
-                        Id=1,
-                        First= "first_4",
-                        Last= "last_4",
-                        Email="email_4@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 4,
-                    Title ="Dron for sell",
-                    Price = 520.0m,
-                    Description = "This is a brand new Dron for sell, looking for good deal",
-                    Condition = "New"
-                },
-               new Ad(){
-                    User = new User()
-                    {
-                        Id=5,
-                        First= "first_5",
-                        Last= "last_5",
-                        Email="email_5@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 5,
-                    Title ="Samsung for sell",
-                    Price = 110.0m,
-                    Description = "New Samsung for sell",
-                    Condition = "New"
-                },
-               new Ad(){
-                    User = new User()
-                    {
-                        Id=6,
-                        First= "first_6",
-                        Last= "last_6",
-                        Email="email_6@neiu.edu",
-                        Phone="1234567898"
-                    },
-                    Id= 6,
-                    Title ="football for sell",
-                    Price = 50.00m,
-                    Description = "Used football in a good condition for sell",
-                    Condition = "Used"
-                },
-        };
-
-        // Get the list of the ads
         public static List<Ad> GetAds()
         {
-            return _Ads;
-        }
-
-        // Get the list of ads where user id == to this user id
-        public static List<Ad> GetUserAds()
-        {
-            List<Ad> Ads = new List<Ad>() { };
-            foreach (Ad i in _Ads)
+            List<Ad> ads = new List<Ad>();
+            string sql = "SELECT * FROM ads";
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
-                if (i.User.Id == 1)
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    Ads.Add(i);
+                    try
+                    {
+
+                        cmd.Connection.Open();
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    ads.Add(new Ad()
+                                    {
+                                        Id = reader.GetInt64("Id"),
+                                        Title = reader.GetString("Title"),
+                                        Price = reader.GetDecimal("Price"),
+                                        Description = reader.GetString("Description"),
+                                        Condition = reader.GetString("Condition")
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
                 }
             }
-            return Ads;
+            return ads;
         }
 
-        // Create new ad
+        public static List<Ad> GetUserAds(int UserId)
+        {
+            List<Ad> ads = new List<Ad>();
+            string sql = "SELECT * FROM ads a WHERE a.userId = @UserId";
+
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    try
+                    {
+
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@UserId", UserId);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    ads.Add(new Ad()
+                                    {
+                                        Id = reader.GetInt64("Id"),
+                                        Title = reader.GetString("Title"),
+                                        Price = reader.GetDecimal("Price"),
+                                        Description = reader.GetString("Description"),
+                                        Condition = reader.GetString("Condition")
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return ads;
+        }
+
+
         public static Ad CreateAd(Ad ad)
         {
-            Ad lastAd = _Ads.LastOrDefault();
-            ad.Id = lastAd.Id + 1;
-            _Ads.Add(ad);
+            string sql = @"INSERT INTO ads (title, `condition` , description, price, userId) VALUES(@Title, @Condition, @Description, @Price, @UserId); SELECT LAST_INSERT_ID();";
+
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Title", ad.Title);
+                        cmd.Parameters.AddWithValue("@Condition", ad.Condition);
+                        cmd.Parameters.AddWithValue("@Description", ad.Description);
+                        cmd.Parameters.AddWithValue("@Price", ad.Price);
+                        cmd.Parameters.AddWithValue("@UserId", ad.User.Id);
+                        string o = cmd.ExecuteScalar().ToString();
+                        long id = 0;
+                        long.TryParse(o, out id);
+                        ad.Id = id;
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
             return ad;
         }
-        // Update an ad
+
         public static Ad UpdateAd(Ad ad)
         {
-            foreach (Ad i in _Ads)
+            string sql = @"UPDATE ads SET title = @Title, condition = @Condition , description = @Description, price = @Price WHERE id = @Id";
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
-                if (ad.Id == i.Id)
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    i.Title = ad.Title;
-                    i.Price = ad.Price;
-                    i.Description = ad.Description;
-                    i.Condition = ad.Condition;
-                };
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Title", ad.Title);
+                        cmd.Parameters.AddWithValue("@Condition", ad.Condition);
+                        cmd.Parameters.AddWithValue("@Description", ad.Description);
+                        cmd.Parameters.AddWithValue("@Price", ad.Price);
+                        string o = cmd.ExecuteScalar().ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
             }
             return ad;
         }
 
         public static Ad GetUserAd(int Id)
         {
-            Ad ad = new Ad();
-            foreach (Ad i in _Ads)
+            Ad ad = null;
+            string sql = "SELECT * FROM ads WHERE Id=@Id";
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
-                if (Id == i.Id)
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    ad = i;
-                };
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Id", Id);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                if (reader.Read())
+                                {
+                                    ad = new Ad()
+                                    {
+                                        Id = reader.GetInt64("Id"),
+                                        Title = reader.GetString("Title"),
+                                        Price = reader.GetDecimal("Price"),
+                                        Description = reader.GetString("Description"),
+                                        Condition = reader.GetString("Condition")
+                                    };
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
             }
             return ad;
         }

@@ -272,7 +272,6 @@
       <DependentUpon>Main.Master</DependentUpon>
     </Compile>
     <Compile Include="Models\Ad.cs" />
-    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Home.aspx.cs">
@@ -290,7 +289,9 @@
       <DependentUpon>LogIn.aspx</DependentUpon>
     </Compile>
     <Compile Include="Reopsitories\AdRepository.cs" />
+    <Compile Include="Reopsitories\Error.cs" />
     <Compile Include="Reopsitories\Interfaces\IAdRepository.cs" />
+    <Compile Include="Reopsitories\Interfaces\IError.cs" />
     <Compile Include="Reopsitories\Interfaces\IUserRepository.cs" />
     <Compile Include="Reopsitories\UserRepository.cs" />
     <Compile Include="SignUp.aspx.cs">
