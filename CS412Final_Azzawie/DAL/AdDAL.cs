@@ -94,7 +94,6 @@ namespace CS412Final_Azzawie.DAL
             return ads;
         }
 
-
         public static Ad CreateAd(Ad ad)
         {
             string sql = @"INSERT INTO ads (title, `condition` , description, price, userId) VALUES(@Title, @Condition, @Description, @Price, @UserId); SELECT LAST_INSERT_ID();";

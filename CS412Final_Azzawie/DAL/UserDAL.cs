@@ -89,5 +89,31 @@ namespace CS412Final_Azzawie.DAL
             }
             return user;
         }
+
+        public static bool DoesUserExistByEmail(string email)
+        {
+            bool ret = true;
+            string sql = @"SELECT * FROM Users WHERE Email=@Email";
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            ret = reader.HasRows;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return ret;
+        }
     }
 }

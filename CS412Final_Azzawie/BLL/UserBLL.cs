@@ -19,7 +19,11 @@ namespace CS412Final_Azzawie.BLL
 
         public User CreateUser(User user)
         {
-            return _userRepository.CreateUser(user);
+            if (_userRepository.DoesUserExistByEmail(user.Email) == false)
+            {
+                return _userRepository.CreateUser(user);
+            }
+            return null;
         }
 
         public User GetUser(string email, string password)

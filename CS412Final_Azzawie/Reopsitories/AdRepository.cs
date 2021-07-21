@@ -14,11 +14,11 @@ namespace CS412Final_Azzawie.Reopsitories
         {
             return AdDAL.GetAds();
         }
-        public List<Ad> GetUserAds()
-        {
-            return AdDAL.GetUserAds();
-        }
 
+        public List<Ad> GetUserAds(int UserId)
+        {
+            return AdDAL.GetUserAds(UserId);
+        }
 
         public Ad GetUserAd(int Id)
         {
@@ -29,6 +29,7 @@ namespace CS412Final_Azzawie.Reopsitories
         {
             return AdDAL.CreateAd(ad);
         }
+
         public Ad UpdateAd(Ad ad)
         {
             return AdDAL.UpdateAd(ad);

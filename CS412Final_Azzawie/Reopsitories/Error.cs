@@ -10,7 +10,6 @@ namespace CS412Final_Azzawie.Reopsitories
     {
         public bool Log(Exception ex)
         {
-            // log error to the database
             return false;
         }
     }
