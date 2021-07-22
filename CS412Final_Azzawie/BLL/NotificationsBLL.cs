@@ -19,7 +19,7 @@ namespace CS412Final_Azzawie.BLL
             using (MailMessage message = new MailMessage())
             {
                 message.To.Add(to.Trim());
-                message.From = new MailAddress(message.From.Address, "Through Me");
+                message.From = new MailAddress(message.From.Address, "Buy&Sell WebSite");
                 message.Subject = subject;
                 if (string.IsNullOrWhiteSpace(replyTo) == false)
                 {
@@ -32,7 +32,7 @@ namespace CS412Final_Azzawie.BLL
                 {
                     try
                     {
-                        await client.SendMailAsync(message);
+                        client.Send(message);
                     }
                     catch (Exception ex)
                     {

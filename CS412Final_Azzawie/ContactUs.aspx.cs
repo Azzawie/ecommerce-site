@@ -73,7 +73,7 @@ namespace CS412Final_Azzawie
 
         public void SendFeedback(string userName, string userEmail, string phone, string comment)
         {
-            string to = "mmakialazzaw@neiu.edu";
+            string to = "mwmaki2@gmail.com";
             string subject = "Feedback";
             string replyTo = to;
             string body = $@"
