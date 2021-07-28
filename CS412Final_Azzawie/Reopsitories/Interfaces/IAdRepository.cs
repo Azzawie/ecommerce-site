@@ -11,7 +11,8 @@ namespace CS412Final_Azzawie.Reopsitories.Interfaces
         List<Ad> GetAds();
         List<Ad> GetUserAds(int UserId);
         Ad GetUserAd(int Id);
-        Ad CreateAd(Ad ad);
+        Ad CreateAd(Ad ad, int userId);
         Ad UpdateAd(Ad ad);
+        bool DeleteAd(int adId);
     }
 }

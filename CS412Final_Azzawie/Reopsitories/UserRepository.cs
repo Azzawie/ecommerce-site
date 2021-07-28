@@ -24,5 +24,10 @@ namespace CS412Final_Azzawie.Reopsitories
         {
             return UserDAL.DoesUserExistByEmail(email);
         }
+
+        public User GetUserById(int userId)
+        {
+            return UserDAL.GetUserById(userId);
+        }
     }
 }

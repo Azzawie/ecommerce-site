@@ -25,14 +25,19 @@ namespace CS412Final_Azzawie.Reopsitories
             return AdDAL.GetUserAd(Id);
         }
 
-        public Ad CreateAd(Ad ad)
+        public Ad CreateAd(Ad ad, int userId)
         {
-            return AdDAL.CreateAd(ad);
+            return AdDAL.CreateAd(ad, userId);
         }
 
         public Ad UpdateAd(Ad ad)
         {
             return AdDAL.UpdateAd(ad);
+        }
+
+        public bool DeleteAd(int adId)
+        {
+            return AdDAL.DeleteAd(adId);
         }
     }
 }

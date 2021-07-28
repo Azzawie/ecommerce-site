@@ -19,7 +19,7 @@ namespace CS412Final_Azzawie.BLL
 
         public User CreateUser(User user)
         {
-            return _userRepository.CreateUser(user);    
+            return _userRepository.CreateUser(user);
         }
 
         public User GetUser(string email, string password)
@@ -30,6 +30,11 @@ namespace CS412Final_Azzawie.BLL
         public bool UserExists(string email)
         {
             return _userRepository.DoesUserExistByEmail(email);
+        }
+
+        public User GetUserById(int userId)
+        {
+            return _userRepository.GetUserById(userId);
         }
     }
 }

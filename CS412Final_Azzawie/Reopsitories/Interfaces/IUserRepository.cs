@@ -11,5 +11,6 @@ namespace CS412Final_Azzawie.Reopsitories.Interfaces
         User GetUser(string email, string password);
         User CreateUser(User user);
         bool DoesUserExistByEmail(string email);
+        User GetUserById(int userId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using CS412Final_Azzawie.BLL.Interfaces;
+﻿using CS412Final_Azzawie.BLL;
+using CS412Final_Azzawie.BLL.Interfaces;
 using CS412Final_Azzawie.Models;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,10 @@ namespace CS412Final_Azzawie.Controllers
     {
         private readonly IAdBLL _adBLL;
 
-        public AdsController(IAdBLL orderBLL)
+        public AdsController()
         {
-            _adBLL = orderBLL;
+            _adBLL = new AdBLL();
+
         }
 
         [HttpGet]
@@ -28,118 +30,76 @@ namespace CS412Final_Azzawie.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public HttpResponseMessage GetOrder(long id)
+        public HttpResponseMessage GetUserAd(long id)
         {
             Ad ad = _adBLL.GetUserAd((int)id);
             if (ad == null)
             {
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Ad doesn't exist for that id");
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Ad doesn't exist");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, ad);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage CreateOrder(AdRequest adRequest)
+        {
+            if (adRequest.Ad == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Ad is required");
+            }
+
+            if (adRequest.UserId == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "User id is required");
+            }
+
+            Ad order = _adBLL.CreateAd(adRequest.Ad, adRequest.UserId);
+            return Request.CreateResponse(HttpStatusCode.OK, order);
+        }
+
+
+        [HttpPut]
+        public HttpResponseMessage ModifyOrder(AdRequest adRequest)
+        {
+            if (adRequest.Ad == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Ad is required");
+            }
+
+            Ad ad = _adBLL.UpdateAd(adRequest.Ad);
+
+            if (ad == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an issue updating your ad");
             }
 
             return Request.CreateResponse(HttpStatusCode.OK, ad);
         }
 
-        [HttpGet]
-        [Route("customers/names/{partialName}")]
-        public HttpResponseMessage GetCustomerNames(string partialName)
-        {
-            List<string> customerNames = new List<string>();
-            List<Order> orders = _orderBLL.GetOrdersByCustomerName(partialName);
-            if (orders != null)
-                customerNames = orders.Select(x => x.CustomerName).Distinct().ToList();
 
-            return Request.CreateResponse(HttpStatusCode.OK, customerNames);
-        }
-
-        [HttpGet]
-        [Route("customers/{partialName}")]
-        public HttpResponseMessage GetOrdersByCustomerName(string partialName)
-        {
-            List<Order> orders = _orderBLL.GetOrdersByCustomerName(partialName);
-            return Request.CreateResponse(HttpStatusCode.OK, orders);
-        }
-
-        [HttpPost]
-        [Route("addorder")]
-        public HttpResponseMessage CreateOrder(OrderRequest orderRequest)
-        {
-            if (orderRequest.Order == null)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "You must provide an order");
-
-            if (orderRequest.ServiceIds == null)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "You must provide a service list");
-
-            Order order = _orderBLL.CreateOrder(orderRequest.Order, orderRequest.ServiceIds);
-
-            return Request.CreateResponse(HttpStatusCode.OK, order);
-        }
-
-        [HttpPost]
-        public HttpResponseMessage CreateOrder2(OrderRequest orderRequest)
-        {
-            if (orderRequest.Order == null)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "You must provide an order");
-
-            if (orderRequest.ServiceIds == null)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "You must provide a service list");
-
-            Order order = _orderBLL.CreateOrder(orderRequest.Order, orderRequest.ServiceIds);
-
-            return Request.CreateResponse(HttpStatusCode.OK, order);
-        }
-
-        [HttpPut]
-        public HttpResponseMessage ModifyOrder(OrderRequest orderRequest)
-        {
-            if (orderRequest.Order == null)
-                return Request.CreateResponse(HttpStatusCode.BadRequest, "You must provide an order");
-
-            Order order = _orderBLL.ModifyOrder(orderRequest.Order, orderRequest.ServiceIds);
-
-            if (order == null)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an issue modifying your order");
-
-            return Request.CreateResponse(HttpStatusCode.OK, order);
-        }
 
         [HttpDelete]
         [Route("{id}")]
         public HttpResponseMessage DeleteOrder(long id)
         {
             Request.Headers.TryGetValues("APIKey", out var apiKey);
-            if (apiKey == null || apiKey.FirstOrDefault() != "abcd")
+            if (apiKey == null || apiKey.FirstOrDefault() != "1234")
+            {
                 return Request.CreateResponse(HttpStatusCode.Forbidden, "Please provide the correct api key");
+            }
 
-            Order order = _orderBLL.GetOrder(id);
-            if (order == null)
-                return Request.CreateResponse(HttpStatusCode.NotFound, "The order id provided does not exist");
-
-            bool orderDeleted = _orderBLL.DeleteOrder(id);
-            if (orderDeleted == false)
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an issue deleting your order");
-
-            return Request.CreateResponse(HttpStatusCode.OK, order);
+            Ad ad = _adBLL.GetUserAd((int)id);
+            if (ad == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Ad doesn't exist");
+            }
+           
+           bool adDeleted = _adBLL.DeleteAd((int)id);
+            if (adDeleted == false)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an issue deleting your ad");
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, $"Ad with id= {id} has been deleted successfully");
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

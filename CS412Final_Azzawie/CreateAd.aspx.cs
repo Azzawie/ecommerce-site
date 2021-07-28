@@ -69,8 +69,7 @@ namespace CS412Final_Azzawie
                 Price = decimal.Parse(price.Text),
                 Description = description.Text,
                 Condition = condition.Text,
-                User = user
-            });
+            }, (int)user.Id);
 
             msgPanel.Visible = true;
             msgPanel.BorderColor = System.Drawing.Color.Green;
