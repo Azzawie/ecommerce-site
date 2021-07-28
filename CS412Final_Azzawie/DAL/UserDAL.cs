@@ -3,52 +3,116 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using MySql.Data.MySqlClient;
+using System.Web.Configuration;
+using CS412Final_Azzawie.Reopsitories.Interfaces;
+using CS412Final_Azzawie.Reopsitories;
 
 namespace CS412Final_Azzawie.DAL
 {
     public class UserDAL
     {
-        // We will use fake users for now until we connect to a database
-        private static List<User> _users = new List<User>() {
-            new User()
-                    {   
-                        Id = 1,
-                        First = "Mustafa",
-                        Last = "Azzawie",
-                        Email = "mmakialazzaw@neiu.edu",
-                        Password = "12345678"
-                    },
-                        new User()
-                    {
-                        Id = 2,
-                        First = "Chris",
-                        Last = "Chris_last",
-                        Email = "Chris@gmail.com",
-                        Password = "12345678"
-                    },
-                        new User()
-                    {
-                        Id = 3,
-                        First = "Greg",
-                        Last = "Greg_last",
-                        Email = "Greg@gmail.com",
-                        Password = "12345678"
-                    }
-    };
-
-        // SQL query to retrieve a user from the database
+        private readonly static IError _error = new Error();
         public static User GetUser(string email, string password)
         {
-            return _users.FirstOrDefault(x => x.Email == email && x.Password == password);
+            User user = null;
+            string sql = @"SELECT * FROM users WHERE Email=@Email AND Password=@Password";
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        cmd.Parameters.AddWithValue("@Password", password);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                if (reader.Read())
+                                {
+                                    user = new User()
+                                    {
+                                        Id = reader.GetInt64("Id"),
+                                        Email = reader.GetString("Email"),
+                                        First = reader.GetString("First"),
+                                        Last = reader.GetString("Last"),
+                                        Password = reader.GetString("Password"),
+                                        Phone = reader.GetString("Phone"),
+                                        Dob = (DateTime)reader["Dob"]
+                                    };
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return user;
         }
 
-        // SQL query to insert a new user into the database and return it back
         public static User CreateUser(User user)
         {
-            User lastUser = _users.LastOrDefault();
-            user.Id = lastUser.Id + 1;
-            _users.Add(user);
+            string sql = @"INSERT INTO users (First, Last, Email, Phone, Password, Dob) 
+                            VALUES
+                            (@First, @Last, @Email, @Phone, @Password, @Dob);
+                            SELECT LAST_INSERT_ID();";
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@First", user.First);
+                        cmd.Parameters.AddWithValue("@Last", user.Last);
+                        cmd.Parameters.AddWithValue("@Email", user.Email);
+                        cmd.Parameters.AddWithValue("@Phone", user.Phone);
+                        cmd.Parameters.AddWithValue("@Password", user.Password);
+                        cmd.Parameters.AddWithValue("@Dob", user.Dob);
+                        string o = cmd.ExecuteScalar().ToString();
+                        long id = 0;
+                        long.TryParse(o, out id);
+                        user.Id = id;
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                        return null;
+                    }
+                }
+            }
             return user;
+        }
+
+        public static bool DoesUserExistByEmail(string email)
+        {
+            bool ret = false;
+            string sql = @"SELECT * FROM users WHERE Email=@Email";
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Email", email);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            ret = reader.HasRows;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return ret;
         }
     }
 }

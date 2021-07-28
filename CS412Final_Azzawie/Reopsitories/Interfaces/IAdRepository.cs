@@ -9,7 +9,7 @@ namespace CS412Final_Azzawie.Reopsitories.Interfaces
     public interface IAdRepository
     {
         List<Ad> GetAds();
-        List<Ad> GetUserAds();
+        List<Ad> GetUserAds(int UserId);
         Ad GetUserAd(int Id);
         Ad CreateAd(Ad ad);
         Ad UpdateAd(Ad ad);

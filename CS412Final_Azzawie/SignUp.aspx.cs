@@ -13,6 +13,9 @@ namespace CS412Final_Azzawie
     public partial class SignUp : System.Web.UI.Page
     {
         private readonly IUserBLL _userBLL = new UserBLL();
+
+        private readonly INotificationsBLL _notifications = new NotificationsBLL();
+
         protected void Page_Load(object sender, EventArgs e)
         {
             Session["signedIn"] = false;
@@ -75,34 +78,10 @@ namespace CS412Final_Azzawie
                 errors.Add("Password and password verification does not match !");
             }
 
-            // Check if the city field is empty
-            if (string.IsNullOrEmpty(city.Text))
+            bool doesUserAlreadyExist = _userBLL.UserExists(email.Text.Trim());
+            if (doesUserAlreadyExist)
             {
-                errors.Add("City field can't be empty !");
-            }
-
-            // Check if the state field is empty
-            if (string.IsNullOrEmpty(state.Text))
-            {
-                errors.Add("State field can't be empty !");
-            }
-
-            // Check if the zipcode field is empty
-            if (string.IsNullOrEmpty(zipCode.Text))
-            {
-                errors.Add("Zip code field can't be empty !");
-            }
-
-            // Check if the street1 field is empty
-            if (string.IsNullOrEmpty(street1.Text))
-            {
-                errors.Add("street 1 field can't be empty !");
-            }
-
-            // Check if the unit number field is empty
-            if (string.IsNullOrEmpty(unitNumber.Text))
-            {
-                errors.Add("Unit number field can't be empty !");
+                errors.Add("User already exists. Please use a different email.");
             }
 
             // Display all errors if it's exist.
@@ -114,31 +93,53 @@ namespace CS412Final_Azzawie
                 return;
             }
 
-            // Create a new user from the user inputs
-            User user = _userBLL.CreateUser(new User()
-                {
-                    First = first.Text,
-                    Last = last.Text,
-                    Email = email.Text,
-                    Password = password.Text
-                }
-            );
 
-            // upload the user object to the session 
-            Session["user"] = user;
+            User user = new User()
+            {
+                First = first.Text,
+                Last = last.Text,
+                Email = email.Text,
+                Password = password.Text,
+                Phone = phone.Text,
+                Dob = DateTime.Parse(dob.Text)
+            };
 
-            // flag the user signed in
-            Session["signedIn"] = true;
+            User newUser = _userBLL.CreateUser(user);
 
-            // Show welcome message 
-            msgPanel.Visible = true;
-            msgPanel.BorderColor = System.Drawing.Color.Green;
-            msgLbl.Text = $"Welcome back {user.First}.";
-            msgLbl.ForeColor = System.Drawing.Color.Green;
+            if (newUser != null)
+            {
+                Session["user"] = newUser;
+                Session["signedIn"] = true;
 
-            // Wait for 3 sec so user can read the message
-            // and then redirect to the home page 
-            Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+                // Show welcome message 
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Green;
+                msgLbl.Text = $"Welcome {newUser.First}.";
+                msgLbl.ForeColor = System.Drawing.Color.Green;
+
+                SendFeedback(newUser.First, newUser.Email, newUser.Phone, $"Welcome {newUser.First} to sell & buy website");
+                Response.AddHeader("REFRESH", "3;URL=Home.aspx");
+            }
+            else
+            {
+                msgPanel.Visible = true;
+                msgPanel.BorderColor = System.Drawing.Color.Red;
+                msgLbl.Text = "Unable to create user. Please check your inputs and try again.";
+            }
+        }
+
+        public void SendFeedback(string userName, string userEmail, string phone, string comment)
+        {
+            string to = userEmail;
+            string subject = "Welcome to sell & buy website";
+            string replyTo = to;
+            string body = $@"
+                            <p>Your Email: {userEmail}</p>
+                            <p>Your Name: {userName}</p>
+                            <p>Your Phone: {phone}</p>
+                            <p>{comment}</p>";
+
+            _notifications.SendEmail(to, subject, body, replyTo);
         }
     }
 }

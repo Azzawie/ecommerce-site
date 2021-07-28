@@ -23,13 +23,11 @@ namespace CS412Final_Azzawie
                 {
                     Response.Redirect("./login.aspx");
                 }
-
-                ViewState["userAds"] = _AdBLL.GetUserAds();
+                User user = (User)HttpContext.Current.Session["user"];
+                ViewState["userAds"] = _AdBLL.GetUserAds((int)user.Id);
                 BindRepeater();
             }
         }
-
-
 
         private void BindRepeater()
         {
