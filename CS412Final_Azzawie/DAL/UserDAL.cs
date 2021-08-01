@@ -114,5 +114,46 @@ namespace CS412Final_Azzawie.DAL
             }
             return ret;
         }
+
+        public static User GetUserById(int userId)
+        {
+            User user = null;
+            string sql = @"SELECT * FROM users WHERE Id=@Id";
+            using (MySqlConnection connection = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Id", userId);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                if (reader.Read())
+                                {
+                                    user = new User()
+                                    {
+                                        Id = reader.GetInt64("Id"),
+                                        Email = reader.GetString("Email"),
+                                        First = reader.GetString("First"),
+                                        Last = reader.GetString("Last"),
+                                        Password = reader.GetString("Password"),
+                                        Phone = reader.GetString("Phone"),
+                                        Dob = (DateTime)reader["Dob"]
+                                    };
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return user;
+        }
     }
 }

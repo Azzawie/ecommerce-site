@@ -28,13 +28,17 @@ namespace CS412Final_Azzawie.BLL
         {
             return _adRepository.GetUserAd(Id);
         }
-        public Ad CreateAd(Ad ad)
+        public Ad CreateAd(Ad ad, int userId)
         {
-            return _adRepository.CreateAd(ad);
+            return _adRepository.CreateAd(ad, userId);
         }
         public Ad UpdateAd(Ad ad)
         {
-            return _adRepository.CreateAd(ad);
+            return _adRepository.UpdateAd(ad);
+        }
+        public bool DeleteAd(int adId)
+        {
+            return _adRepository.DeleteAd(adId);
         }
     }
 }

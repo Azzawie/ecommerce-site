@@ -13,6 +13,7 @@ namespace CS412Final_Azzawie.DAL
     public class AdDAL
     {
         private readonly static IError _error = new Error();
+        private readonly static IUserRepository _user = new UserRepository();
 
         public static List<Ad> GetAds()
         {
@@ -38,7 +39,8 @@ namespace CS412Final_Azzawie.DAL
                                         Title = reader.GetString("Title"),
                                         Price = reader.GetDecimal("Price"),
                                         Description = reader.GetString("Description"),
-                                        Condition = reader.GetString("Condition")
+                                        Condition = reader.GetString("Condition"),
+                                        User = _user.GetUserById(int.Parse(reader.GetString("UserId")))
                                     });
                                 }
                             }
@@ -94,7 +96,7 @@ namespace CS412Final_Azzawie.DAL
             return ads;
         }
 
-        public static Ad CreateAd(Ad ad)
+        public static Ad CreateAd(Ad ad, int userId)
         {
             string sql = @"INSERT INTO ads (Title, `Condition` , Description, Price, UserId) VALUES(@Title, @Condition, @Description, @Price, @UserId); SELECT LAST_INSERT_ID();";
 
@@ -109,7 +111,7 @@ namespace CS412Final_Azzawie.DAL
                         cmd.Parameters.AddWithValue("@Condition", ad.Condition);
                         cmd.Parameters.AddWithValue("@Description", ad.Description);
                         cmd.Parameters.AddWithValue("@Price", ad.Price);
-                        cmd.Parameters.AddWithValue("@UserId", ad.User.Id);
+                        cmd.Parameters.AddWithValue("@UserId", userId);
                         string o = cmd.ExecuteScalar().ToString();
                         long id = 0;
                         long.TryParse(o, out id);
@@ -126,7 +128,8 @@ namespace CS412Final_Azzawie.DAL
 
         public static Ad UpdateAd(Ad ad)
         {
-            string sql = @"UPDATE ads SET Title = @Title, Condition = @Condition , Description = @Description, Price = @Price WHERE Id = @Id";
+            string sql = @"UPDATE ads SET `Title`= @Title, `Condition`= @Condition, `Description`= @Description, `Price`= @Price WHERE Id = @Id";
+
             using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
             {
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -134,11 +137,13 @@ namespace CS412Final_Azzawie.DAL
                     try
                     {
                         cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Id", ad.Id);
                         cmd.Parameters.AddWithValue("@Title", ad.Title);
                         cmd.Parameters.AddWithValue("@Condition", ad.Condition);
                         cmd.Parameters.AddWithValue("@Description", ad.Description);
                         cmd.Parameters.AddWithValue("@Price", ad.Price);
-                        string o = cmd.ExecuteScalar().ToString();
+                        cmd.ExecuteScalar();
+
                     }
                     catch (Exception ex)
                     {
@@ -173,7 +178,8 @@ namespace CS412Final_Azzawie.DAL
                                         Title = reader.GetString("Title"),
                                         Price = reader.GetDecimal("Price"),
                                         Description = reader.GetString("Description"),
-                                        Condition = reader.GetString("Condition")
+                                        Condition = reader.GetString("Condition"),
+                                        User = _user.GetUserById(int.Parse(reader.GetString("UserId")))
                                     };
                                 }
                             }
@@ -186,6 +192,29 @@ namespace CS412Final_Azzawie.DAL
                 }
             }
             return ad;
+        }
+
+        public static bool DeleteAd(int adId)
+        {
+            string sql = @"DELETE FROM ads WHERE Id=@Id";
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@Id", adId);
+                        cmd.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
     }
 }
