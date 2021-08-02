@@ -216,5 +216,44 @@ namespace CS412Final_Azzawie.DAL
             }
             return true;
         }
+
+        public static List<Ad> GetAdsByTitle(string partialName)
+        {
+            List<Ad> ads = new List<Ad>();
+            string sql = "SELECT * FROM ads WHERE Title LIKE CONCAT('%', @PartialName, '%')";
+            using (MySqlConnection conn = new MySqlConnection(WebConfigurationManager.AppSettings["connString"]))
+            {
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    try
+                    {
+                        cmd.Connection.Open();
+                        cmd.Parameters.AddWithValue("@PartialName", partialName);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    ads.Add(new Ad()
+                                    {
+                                        Title = reader.GetString("Title"),
+                                        Description = reader.GetString("Description"),
+                                        Condition = reader.GetString("Condition"),
+                                        Id = reader.GetInt64("Id"),
+                                        Price = reader.GetDecimal("Price")
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _error.Log(ex);
+                    }
+                }
+            }
+            return ads;
+        }
     }
 }

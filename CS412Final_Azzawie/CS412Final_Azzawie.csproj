@@ -182,6 +182,7 @@
     <Content Include="Main.Master" />
     <Content Include="Home.aspx" />
     <Content Include="LogIn.aspx" />
+    <Content Include="Scripts\Home.js" />
     <Content Include="SignUp.aspx" />
     <Content Include="ContactUs.aspx" />
     <Content Include="AboutUs.aspx" />
@@ -252,6 +253,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Styles\Site.css" />
+    <Content Include="UserControls\AdSearchControl.ascx" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
   </ItemGroup>
@@ -358,6 +360,13 @@
     </Compile>
     <Compile Include="EditAd.aspx.designer.cs">
       <DependentUpon>EditAd.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdSearchControl.ascx.cs">
+      <DependentUpon>AdSearchControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdSearchControl.ascx.designer.cs">
+      <DependentUpon>AdSearchControl.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

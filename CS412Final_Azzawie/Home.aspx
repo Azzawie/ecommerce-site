@@ -1,16 +1,20 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="CS412Final_Azzawie.Home" %>
-
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <title>MarketPlace</title>
+    <script src="Scripts/Home.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div class="col-2 search-bar">
+        <asp:TextBox class="searchField" ID="adTitle" runat="server" placeholder = "Search by title"></asp:TextBox>
+        <AdControl:AdSearchControl runat="server" ID="AdSearchControl" />
+    </div>
+
     <div class="card-deck">
         <asp:Repeater ID="publicAds" runat="server" OnItemDataBound="publicAds_ItemDataBound">
             <ItemTemplate>
-                <a href="ShowAd.aspx?id=<%#adId+1%>" class="a-ad-click">
+                <asp:HiddenField ID="adId" Value="" runat="server" />
+                <a href="ShowAd.aspx?id=<%# Eval("Id")%>" class="a-ad-click">
                     <div class="card">
-                        <!-- <img src="..." class="card-img-top" alt="...">-->
-
                         <span class="custom-badge">
                             <asp:Label ID="conition" runat="server" Text="Label"></asp:Label>
                         </span>
@@ -18,8 +22,6 @@
                             <h5 class="card-title">
                                 <asp:Label ID="title" runat="server" Text="Label"></asp:Label>
                             </h5>
-
-
                             <p class="card-text">
                                 <asp:Label ID="desc" runat="server" Text="Label"></asp:Label>
                             </p>

@@ -39,5 +39,10 @@ namespace CS412Final_Azzawie.Reopsitories
         {
             return AdDAL.DeleteAd(adId);
         }
+
+        public List<Ad> GetAdsByTitle(string partialName)
+        {
+            return AdDAL.GetAdsByTitle(partialName);
+        }
     }
 }

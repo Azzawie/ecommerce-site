@@ -122,7 +122,6 @@ a {
     color: #fefefe;
 }
 
-
 .a-ad-click {
     color: black !important;
     text-decoration: none;
@@ -134,3 +133,46 @@ a {
         text-decoration: none;
         background-color: white !important;
     }
+
+.blankAdElement {
+    display: block;
+    cursor: pointer;
+    padding: 10px;
+}
+
+    .blankAdElement:nth-child(odd) {
+        background-color: lightgray;
+    }
+
+    .blankAdElement:hover {
+        background-color: gray;
+        color: white;
+    }
+
+    .blankAdElement > a {
+        color: black !important;
+        text-decoration: none;
+    }
+
+
+.adSearchElement {
+    min-width: 200px;
+    border: 1px solid black;
+    background-color: white;
+    position: absolute;
+    z-index: 99;
+}
+
+.search-bar {
+    border: solid #d8d8d8 1px;
+    border-radius: 5px;
+    padding: 10px 10px;
+    background-color: #dfdfdf;
+    margin: 30px 5px;
+}
+
+.searchField {
+    border: solid #d8d8d8 1px;
+    border-radius: 5px;
+    padding: 5px 10px;
+}

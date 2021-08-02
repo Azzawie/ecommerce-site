@@ -40,5 +40,10 @@ namespace CS412Final_Azzawie.BLL
         {
             return _adRepository.DeleteAd(adId);
         }
+
+        public List<Ad> GetAdsByTitle(string partialName)
+        {
+            return _adRepository.GetAdsByTitle(partialName);
+        }
     }
 }
