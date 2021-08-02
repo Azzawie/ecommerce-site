@@ -12,7 +12,6 @@
     <div class="card-deck">
         <asp:Repeater ID="publicAds" runat="server" OnItemDataBound="publicAds_ItemDataBound">
             <ItemTemplate>
-                <asp:HiddenField ID="adId" Value="" runat="server" />
                 <a href="ShowAd.aspx?id=<%# Eval("Id")%>" class="a-ad-click">
                     <div class="card">
                         <span class="custom-badge">
