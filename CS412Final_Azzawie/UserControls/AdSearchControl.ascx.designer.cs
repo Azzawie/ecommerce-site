@@ -7,38 +7,38 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CS412Final_Azzawie
+namespace CS412Final_Azzawie.UserControls
 {
 
 
-    public partial class Home
+    public partial class AdSearchControl
     {
 
         /// <summary>
-        /// adTitle control.
+        /// AdSearch control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox adTitle;
+        protected global::System.Web.UI.WebControls.Panel AdSearch;
 
         /// <summary>
-        /// AdSearchControl control.
+        /// BlankAd control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CS412Final_Azzawie.UserControls.AdSearchControl AdSearchControl;
+        protected global::System.Web.UI.WebControls.Label BlankAd;
 
         /// <summary>
-        /// publicAds control.
+        /// AdList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater publicAds;
+        protected global::System.Web.UI.WebControls.Panel AdList;
     }
 }

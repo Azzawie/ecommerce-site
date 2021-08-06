@@ -14,5 +14,6 @@ namespace CS412Final_Azzawie.BLL.Interfaces
         Ad CreateAd(Ad ad, int userId);
         Ad UpdateAd(Ad ad);
         bool DeleteAd(int adId);
+        List<Ad> GetAdsByTitle(string partialName);
     }
 }

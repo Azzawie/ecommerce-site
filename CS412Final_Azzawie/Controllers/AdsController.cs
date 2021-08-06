@@ -41,7 +41,7 @@ namespace CS412Final_Azzawie.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage CreateOrder(AdRequest adRequest)
+        public HttpResponseMessage CreateAd(AdRequest adRequest)
         {
             if (adRequest.Ad == null)
             {
@@ -53,13 +53,12 @@ namespace CS412Final_Azzawie.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "User id is required");
             }
 
-            Ad order = _adBLL.CreateAd(adRequest.Ad, adRequest.UserId);
-            return Request.CreateResponse(HttpStatusCode.OK, order);
+            Ad ad = _adBLL.CreateAd(adRequest.Ad, adRequest.UserId);
+            return Request.CreateResponse(HttpStatusCode.OK, ad);
         }
 
-
         [HttpPut]
-        public HttpResponseMessage ModifyOrder(AdRequest adRequest)
+        public HttpResponseMessage ModifyAd(AdRequest adRequest)
         {
             if (adRequest.Ad == null)
             {
@@ -76,11 +75,9 @@ namespace CS412Final_Azzawie.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, ad);
         }
 
-
-
         [HttpDelete]
         [Route("{id}")]
-        public HttpResponseMessage DeleteOrder(long id)
+        public HttpResponseMessage DeleteAd(long id)
         {
             Request.Headers.TryGetValues("APIKey", out var apiKey);
             if (apiKey == null || apiKey.FirstOrDefault() != "1234")
@@ -100,6 +97,13 @@ namespace CS412Final_Azzawie.Controllers
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, "There was an issue deleting your ad");
             }
             return Request.CreateResponse(HttpStatusCode.OK, $"Ad with id= {id} has been deleted successfully");
+        }
+        
+        [HttpGet]
+        [Route("search/{partialTitle}")]
+        public List<Ad> GetAdsByTitle(string partialTitle)
+        {
+            return _adBLL.GetAdsByTitle(partialTitle);
         }
     }
 }
